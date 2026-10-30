@@ -1,0 +1,103 @@
+{
+  "items": [
+    {
+      "box_2d": [
+        0.185,
+        0.34,
+        0.6,
+        0.675
+      ],
+      "label": "grey plaid tweed blazer",
+      "category": "overtop",
+      "subcategory": "blazer",
+      "pattern": "checkered",
+      "fit": "tailored",
+      "length": "regular",
+      "material": "tweed",
+      "color_primary": "grey",
+      "color_secondary": "black",
+      "layer": "outer",
+      "confidence": 0.98
+    },
+    {
+      "box_2d": [
+        0.23,
+        0.435,
+        0.49,
+        0.56
+      ],
+      "label": "black sleeveless top",
+      "category": "top",
+      "subcategory": "tank_top",
+      "pattern": "plain",
+      "fit": "slim",
+      "length": "crop",
+      "material": "cotton",
+      "color_primary": "black",
+      "color_secondary": null,
+      "layer": "inner",
+      "confidence": 0.96
+    },
+    {
+      "box_2d": [
+        0.42,
+        0.38,
+        0.895,
+        0.66
+      ],
+      "label": "white wide-leg trousers",
+      "category": "bottom",
+      "subcategory": "wide_leg_trousers",
+      "pattern": "plain",
+      "fit": "baggy",
+      "length": "ankle_length",
+      "material": "cotton",
+      "color_primary": "white",
+      "color_secondary": null,
+      "layer": "base",
+      "confidence": 0.97
+    },
+    {
+      "box_2d": [
+        0.88,
+        0.44,
+        1.0,
+        0.68
+      ],
+      "label": "white platform sandals",
+      "category": "footwear",
+      "subcategory": "platform_sandals",
+      "pattern": "plain",
+      "fit": "regular",
+      "length": "regular",
+      "material": "leather",
+      "color_primary": "white",
+      "color_secondary": null,
+      "layer": "base",
+      "confidence": 0.95
+    },
+    {
+      "box_2d": [
+        0.44,
+        0.55,
+        0.58,
+        0.69
+      ],
+      "label": "black studded handbag",
+      "category": "accessory",
+      "subcategory": "handbag",
+      "pattern": "plain",
+      "fit": "regular",
+      "length": "regular",
+      "material": "leather",
+      "color_primary": "black",
+      "color_secondary": null,
+      "layer": "outer",
+      "confidence": 0.95
+    }
+  ],
+  "is_group_photo": false,
+  "has_no_person": false,
+  "person_count": 1,
+  "rejection_reason": null
+}

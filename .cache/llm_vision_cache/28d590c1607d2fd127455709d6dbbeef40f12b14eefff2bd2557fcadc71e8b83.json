@@ -1,0 +1,207 @@
+{
+  "person_count": 1,
+  "is_group_photo": false,
+  "has_no_person": false,
+  "rejection_reason": null,
+  "items": [
+    {
+      "box_2d": [
+        164.0,
+        289.0,
+        513.0,
+        650.0
+      ],
+      "name": "Beige Linen Blazer",
+      "label": "Beige Blazer",
+      "category": "overtop",
+      "subcategory": "blazer",
+      "pattern": "plain",
+      "fit": "tailored",
+      "silhouette": "straight",
+      "length": "regular",
+      "material": "linen",
+      "formality": "smart_casual",
+      "color_primary": "beige",
+      "color_secondary": "tan",
+      "layer": "outer",
+      "style_tags": [
+        "minimal",
+        "chic",
+        "formal"
+      ],
+      "occasions": [
+        "work_formal",
+        "date_night",
+        "casual_outing"
+      ],
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "weather": [
+        "warm"
+      ],
+      "confidence": 0.98
+    },
+    {
+      "box_2d": [
+        169.0,
+        372.0,
+        439.0,
+        506.0
+      ],
+      "name": "Light Blue Button Shirt",
+      "label": "Light Blue Shirt",
+      "category": "top",
+      "subcategory": "shirt",
+      "pattern": "plain",
+      "fit": "slim",
+      "silhouette": "fitted",
+      "length": "regular",
+      "material": "cotton",
+      "formality": "smart_casual",
+      "color_primary": "blue",
+      "color_secondary": null,
+      "layer": "inner",
+      "style_tags": [
+        "minimal",
+        "chic",
+        "formal"
+      ],
+      "occasions": [
+        "work_formal",
+        "casual_outing",
+        "date_night"
+      ],
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "weather": [
+        "warm"
+      ],
+      "confidence": 0.96
+    },
+    {
+      "box_2d": [
+        428.0,
+        335.0,
+        878.0,
+        606.0
+      ],
+      "name": "Beige Tailored Linen Trousers",
+      "label": "Beige Trousers",
+      "category": "bottom",
+      "subcategory": "formal_trousers",
+      "pattern": "plain",
+      "fit": "tailored",
+      "silhouette": "straight",
+      "length": "ankle_length",
+      "material": "linen",
+      "formality": "smart_casual",
+      "color_primary": "beige",
+      "color_secondary": "tan",
+      "layer": "base",
+      "style_tags": [
+        "minimal",
+        "chic",
+        "formal"
+      ],
+      "occasions": [
+        "work_formal",
+        "casual_outing",
+        "date_night"
+      ],
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "weather": [
+        "warm"
+      ],
+      "confidence": 0.98
+    },
+    {
+      "box_2d": [
+        855.0,
+        396.0,
+        921.0,
+        492.0
+      ],
+      "name": "Black Leather Loafers",
+      "label": "Black Loafers",
+      "category": "footwear",
+      "subcategory": "loafers",
+      "pattern": "plain",
+      "fit": "regular",
+      "silhouette": "relaxed",
+      "length": "regular",
+      "material": "leather",
+      "formality": "smart_casual",
+      "color_primary": "black",
+      "color_secondary": null,
+      "layer": "base",
+      "style_tags": [
+        "minimal",
+        "chic",
+        "formal"
+      ],
+      "occasions": [
+        "work_formal",
+        "date_night",
+        "casual_outing"
+      ],
+      "seasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "weather": [
+        "warm",
+        "cool"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "box_2d": [
+        869.0,
+        488.0,
+        933.0,
+        591.0
+      ],
+      "name": "Black Leather Loafers",
+      "label": "Black Loafers",
+      "category": "footwear",
+      "subcategory": "loafers",
+      "pattern": "plain",
+      "fit": "regular",
+      "silhouette": "relaxed",
+      "length": "regular",
+      "material": "leather",
+      "formality": "smart_casual",
+      "color_primary": "black",
+      "color_secondary": null,
+      "layer": "base",
+      "style_tags": [
+        "minimal",
+        "chic",
+        "formal"
+      ],
+      "occasions": [
+        "work_formal",
+        "date_night",
+        "casual_outing"
+      ],
+      "seasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "weather": [
+        "warm",
+        "cool"
+      ],
+      "confidence": 0.95
+    }
+  ]
+}

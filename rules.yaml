@@ -1,0 +1,469 @@
+# Deterministic Rules Table for OOTD Fashion AI
+
+subcategories:
+  # Indian Ethnic Tops
+  kurti:
+    formality: "casual"
+    formality_modifiers:
+      silk: "smart_casual"
+      velvet: "semi_formal"
+      chiffon_georgette: "smart_casual"
+    occasions: ["college", "casual_outing", "festival"]
+    seasons: ["spring", "summer", "fall"]
+    weather: ["warm", "hot"]
+    style_tags: ["ethnic", "casual", "indo_western"]
+  kurta:
+    formality: "smart_casual"
+    formality_modifiers:
+      silk: "formal"
+      linen: "smart_casual"
+    occasions: ["festival", "wedding", "casual_outing", "party"]
+    seasons: ["spring", "summer", "fall", "winter"]
+    weather: ["warm", "cool"]
+    style_tags: ["ethnic", "formal"]
+  saree_blouse:
+    formality: "formal"
+    occasions: ["wedding", "festival", "party"]
+    seasons: ["spring", "summer", "fall", "winter"]
+    weather: ["warm", "cool"]
+    style_tags: ["ethnic", "formal", "chic"]
+
+  # Western Tops
+  tshirt:
+    formality: "casual"
+    occasions: ["casual_outing", "college", "lounge"]
+    seasons: ["spring", "summer"]
+    weather: ["hot", "warm"]
+    style_tags: ["casual", "minimal", "streetwear"]
+  shirt:
+    formality: "smart_casual"
+    formality_modifiers:
+      cotton: "smart_casual"
+      silk: "formal"
+    occasions: ["work_formal", "casual_outing", "college"]
+    seasons: ["spring", "summer", "fall", "winter"]
+    weather: ["warm", "cool"]
+    style_tags: ["formal", "minimal", "preppy"]
+  polo:
+    formality: "smart_casual"
+    occasions: ["casual_outing", "college", "vacation"]
+    seasons: ["spring", "summer"]
+    weather: ["warm", "hot"]
+    style_tags: ["preppy", "sporty", "casual"]
+  tank_top:
+    formality: "casual"
+    occasions: ["gym_sports", "casual_outing", "lounge"]
+    seasons: ["summer"]
+    weather: ["hot"]
+    style_tags: ["sporty", "athleisure", "casual"]
+  crop_top:
+    formality: "casual"
+    occasions: ["party", "casual_outing", "date_night"]
+    seasons: ["summer", "spring"]
+    weather: ["hot", "warm"]
+    style_tags: ["chic", "y2k", "streetwear"]
+  blouse:
+    formality: "smart_casual"
+    occasions: ["work_formal", "party", "date_night"]
+    seasons: ["spring", "summer", "fall"]
+    weather: ["warm", "cool"]
+    style_tags: ["chic", "formal"]
+  corset:
+    formality: "semi_formal"
+    occasions: ["party", "date_night"]
+    seasons: ["spring", "summer", "fall"]
+    weather: ["warm"]
+    style_tags: ["chic", "vintage", "y2k"]
+
+  # Indian Ethnic Bottoms
+  salwar:
+    formality: "casual"
+    occasions: ["college", "casual_outing", "festival"]
+    seasons: ["spring", "summer", "fall"]
+    weather: ["hot", "warm"]
+    style_tags: ["ethnic", "casual"]
+  churidar:
+    formality: "smart_casual"
+    occasions: ["festival", "wedding", "casual_outing"]
+    seasons: ["spring", "summer", "fall", "winter"]
+    weather: ["warm", "cool"]
+    style_tags: ["ethnic", "formal"]
+  palazzo:
+    formality: "casual"
+    occasions: ["college", "casual_outing", "vacation", "festival"]
+    seasons: ["spring", "summer"]
+    weather: ["hot", "warm"]
+    style_tags: ["ethnic", "indo_western", "boho", "casual"]
+  dhoti_pants:
+    formality: "semi_formal"
+    occasions: ["festival", "wedding", "party"]
+    seasons: ["spring", "summer", "fall"]
+    weather: ["warm"]
+    style_tags: ["ethnic", "indo_western"]
+  leggings:
+    formality: "casual"
+    occasions: ["college", "casual_outing", "lounge"]
+    seasons: ["spring", "summer", "fall", "winter"]
+    weather: ["warm", "cool"]
+    style_tags: ["casual", "minimal", "athleisure"]
+
+  # Western Bottoms
+  jeans:
+    formality: "casual"
+    formality_modifiers:
+      black: "smart_casual"
+    occasions: ["casual_outing", "college", "date_night"]
+    seasons: ["spring", "summer", "fall", "winter"]
+    weather: ["warm", "cool"]
+    style_tags: ["casual", "streetwear", "minimal"]
+  trousers:
+    formality: "formal"
+    occasions: ["work_formal", "formal", "date_night"]
+    seasons: ["spring", "summer", "fall", "winter"]
+    weather: ["warm", "cool"]
+    style_tags: ["formal", "minimal", "preppy"]
+  cargo_pants:
+    formality: "casual"
+    occasions: ["casual_outing", "college", "vacation"]
+    seasons: ["spring", "fall", "winter"]
+    weather: ["cool", "warm"]
+    style_tags: ["streetwear", "casual", "grunge"]
+  sweatpants:
+    formality: "casual"
+    occasions: ["gym_sports", "lounge"]
+    seasons: ["fall", "winter"]
+    weather: ["cold", "cool"]
+    style_tags: ["athleisure", "casual", "sporty"]
+  shorts:
+    formality: "casual"
+    occasions: ["vacation", "casual_outing", "gym_sports"]
+    seasons: ["summer"]
+    weather: ["hot"]
+    style_tags: ["casual", "sporty"]
+  skirt:
+    formality: "smart_casual"
+    occasions: ["date_night", "party", "casual_outing"]
+    seasons: ["spring", "summer"]
+    weather: ["warm", "hot"]
+    style_tags: ["chic", "preppy", "feminine"]
+
+  # Ethnic Ensembles / Dresses
+  saree:
+    formality: "formal"
+    occasions: ["wedding", "festival", "party"]
+    seasons: ["spring", "summer", "fall", "winter"]
+    weather: ["warm", "cool"]
+    style_tags: ["ethnic", "formal", "chic"]
+  anarkali:
+    formality: "semi_formal"
+    occasions: ["festival", "wedding", "party"]
+    seasons: ["spring", "summer", "fall", "winter"]
+    weather: ["warm", "cool"]
+    style_tags: ["ethnic", "chic"]
+  lehenga:
+    formality: "formal"
+    occasions: ["wedding", "festival", "party"]
+    seasons: ["spring", "summer", "fall", "winter"]
+    weather: ["warm", "cool"]
+    style_tags: ["ethnic", "formal", "chic"]
+  casual_dress:
+    formality: "casual"
+    occasions: ["casual_outing", "vacation", "date_night"]
+    seasons: ["spring", "summer"]
+    weather: ["hot", "warm"]
+    style_tags: ["casual", "chic", "boho"]
+  maxi_dress:
+    formality: "smart_casual"
+    occasions: ["vacation", "party", "date_night"]
+    seasons: ["summer", "spring"]
+    weather: ["warm", "hot"]
+    style_tags: ["boho", "chic"]
+  slip_dress:
+    formality: "semi_formal"
+    occasions: ["party", "date_night"]
+    seasons: ["spring", "summer"]
+    weather: ["warm"]
+    style_tags: ["chic", "minimal", "y2k"]
+  bodycon_dress:
+    formality: "semi_formal"
+    occasions: ["party", "date_night"]
+    seasons: ["spring", "summer", "fall"]
+    weather: ["warm"]
+    style_tags: ["chic", "y2k"]
+  shirt_dress:
+    formality: "smart_casual"
+    occasions: ["work_formal", "casual_outing", "college"]
+    seasons: ["spring", "summer", "fall"]
+    weather: ["warm"]
+    style_tags: ["preppy", "minimal", "smart_casual"]
+
+  # Overtop / Outerwear & Drapes
+  dupatta_stole:
+    formality: "smart_casual"
+    formality_modifiers:
+      silk: "formal"
+      chiffon_georgette: "smart_casual"
+    occasions: ["festival", "wedding", "college", "casual_outing"]
+    seasons: ["spring", "summer", "fall", "winter"]
+    weather: ["warm", "cool"]
+    style_tags: ["ethnic", "chic"]
+  nehru_jacket:
+    formality: "formal"
+    occasions: ["wedding", "festival", "party"]
+    seasons: ["fall", "winter", "spring"]
+    weather: ["cool", "cold"]
+    style_tags: ["ethnic", "formal", "indo_western"]
+  shawl:
+    formality: "smart_casual"
+    occasions: ["winter", "festival", "casual_outing"]
+    seasons: ["winter", "fall"]
+    weather: ["cold", "cool"]
+    style_tags: ["ethnic", "vintage"]
+  blazer:
+    formality: "formal"
+    occasions: ["work_formal", "party", "date_night"]
+    seasons: ["fall", "winter", "spring"]
+    weather: ["cool", "cold"]
+    style_tags: ["formal", "chic", "minimal"]
+  jacket:
+    formality: "casual"
+    formality_modifiers:
+      leather: "smart_casual"
+    occasions: ["casual_outing", "college", "travel"]
+    seasons: ["fall", "winter"]
+    weather: ["cool", "cold", "windy"]
+    style_tags: ["streetwear", "casual", "grunge"]
+  hoodie:
+    formality: "casual"
+    occasions: ["college", "lounge", "casual_outing"]
+    seasons: ["fall", "winter"]
+    weather: ["cold", "cool", "windy"]
+    style_tags: ["streetwear", "casual", "athleisure"]
+  sweater:
+    formality: "casual"
+    occasions: ["casual_outing", "college", "work_formal"]
+    seasons: ["fall", "winter"]
+    weather: ["cold", "cool"]
+    style_tags: ["minimal", "preppy", "vintage"]
+  cardigan:
+    formality: "smart_casual"
+    occasions: ["work_formal", "casual_outing", "college"]
+    seasons: ["spring", "fall"]
+    weather: ["cool"]
+    style_tags: ["preppy", "vintage", "minimal"]
+  trench_coat:
+    formality: "formal"
+    occasions: ["work_formal", "travel", "date_night"]
+    seasons: ["fall", "winter"]
+    weather: ["cold", "rainy", "windy"]
+    style_tags: ["chic", "formal", "vintage"]
+  vest:
+    formality: "smart_casual"
+    occasions: ["casual_outing", "college"]
+    seasons: ["fall", "winter"]
+    weather: ["cool"]
+    style_tags: ["streetwear", "preppy"]
+  denim_jacket:
+    formality: "casual"
+    occasions: ["casual_outing", "college", "travel"]
+    seasons: ["spring", "fall"]
+    weather: ["cool", "windy"]
+    style_tags: ["streetwear", "casual", "vintage"]
+
+  # Footwear
+  juttis_mojaris:
+    formality: "smart_casual"
+    occasions: ["festival", "wedding", "party", "casual_outing"]
+    seasons: ["spring", "summer", "fall", "winter"]
+    weather: ["warm", "cool"]
+    style_tags: ["ethnic", "chic"]
+  kolhapuris:
+    formality: "casual"
+    occasions: ["casual_outing", "college", "festival"]
+    seasons: ["summer", "spring"]
+    weather: ["hot", "warm"]
+    style_tags: ["ethnic", "boho", "casual"]
+  ethnic_flats:
+    formality: "smart_casual"
+    occasions: ["festival", "party", "casual_outing"]
+    seasons: ["spring", "summer", "fall"]
+    weather: ["warm", "hot"]
+    style_tags: ["ethnic", "chic"]
+  sneakers:
+    formality: "casual"
+    occasions: ["casual_outing", "college", "gym_sports"]
+    seasons: ["spring", "summer", "fall", "winter"]
+    weather: ["warm", "cool", "hot"]
+    style_tags: ["streetwear", "athleisure", "casual"]
+  boots:
+    formality: "smart_casual"
+    occasions: ["casual_outing", "party", "date_night"]
+    seasons: ["fall", "winter"]
+    weather: ["cold", "cool", "rainy"]
+    style_tags: ["grunge", "chic", "vintage"]
+  sandals:
+    formality: "casual"
+    occasions: ["casual_outing", "vacation", "college"]
+    seasons: ["summer", "spring"]
+    weather: ["hot", "warm"]
+    style_tags: ["casual", "boho"]
+  formal_shoes:
+    formality: "formal"
+    occasions: ["work_formal", "wedding", "formal"]
+    seasons: ["spring", "summer", "fall", "winter"]
+    weather: ["warm", "cool"]
+    style_tags: ["formal"]
+  loafers:
+    formality: "smart_casual"
+    occasions: ["work_formal", "casual_outing", "party"]
+    seasons: ["spring", "summer", "fall"]
+    weather: ["warm", "cool"]
+    style_tags: ["preppy", "smart_casual", "minimal"]
+  heels:
+    formality: "formal"
+    occasions: ["party", "wedding", "date_night"]
+    seasons: ["spring", "summer", "fall", "winter"]
+    weather: ["warm", "cool"]
+    style_tags: ["chic", "formal"]
+
+  # Extended Outerwear
+  bomber_jacket:
+    formality: "casual"
+    occasions: ["casual_outing", "college", "party"]
+    seasons: ["fall", "winter", "spring"]
+    weather: ["cool", "cold"]
+    style_tags: ["streetwear", "casual", "vintage"]
+    layering: "outer"
+  leather_jacket:
+    formality: "smart_casual"
+    occasions: ["party", "casual_outing", "date_night"]
+    seasons: ["fall", "winter"]
+    weather: ["cool", "cold"]
+    style_tags: ["grunge", "chic", "streetwear"]
+    layering: "outer"
+  puffer_jacket:
+    formality: "casual"
+    occasions: ["casual_outing", "vacation"]
+    seasons: ["winter"]
+    weather: ["cold"]
+    style_tags: ["streetwear", "sporty"]
+    layering: "outer"
+
+  # Extended Tops
+  sweatshirt:
+    formality: "casual"
+    occasions: ["college", "casual_outing", "lounge"]
+    seasons: ["fall", "winter", "spring"]
+    weather: ["cool", "cold"]
+    style_tags: ["streetwear", "casual", "athleisure"]
+    layering: "mid"
+
+  # Extended Bottoms
+  wide_leg_trousers:
+    formality: "smart_casual"
+    occasions: ["casual_outing", "work_formal", "party"]
+    seasons: ["spring", "summer", "fall"]
+    weather: ["warm", "cool"]
+    style_tags: ["chic", "minimal", "streetwear"]
+  formal_trousers:
+    formality: "formal"
+    occasions: ["work_formal", "party"]
+    seasons: ["spring", "summer", "fall", "winter"]
+    weather: ["warm", "cool"]
+    style_tags: ["formal", "minimal"]
+  chinos:
+    formality: "smart_casual"
+    occasions: ["casual_outing", "work_formal", "college"]
+    seasons: ["spring", "summer", "fall"]
+    weather: ["warm", "cool"]
+    style_tags: ["preppy", "casual"]
+  joggers:
+    formality: "casual"
+    occasions: ["casual_outing", "college", "lounge", "gym_sports"]
+    seasons: ["spring", "fall", "winter"]
+    weather: ["cool", "warm"]
+    style_tags: ["streetwear", "athleisure", "casual"]
+  track_pants:
+    formality: "casual"
+    occasions: ["gym_sports", "lounge", "casual_outing"]
+    seasons: ["spring", "fall", "winter"]
+    weather: ["cool", "cold"]
+    style_tags: ["sporty", "athleisure"]
+
+  # Extended Footwear
+  platform_sandals:
+    formality: "smart_casual"
+    occasions: ["casual_outing", "party", "date_night", "vacation"]
+    seasons: ["spring", "summer"]
+    weather: ["warm", "hot"]
+    style_tags: ["chic", "y2k", "casual"]
+  flats:
+    formality: "smart_casual"
+    occasions: ["work_formal", "casual_outing", "college"]
+    seasons: ["spring", "summer", "fall"]
+    weather: ["warm", "cool"]
+    style_tags: ["minimal", "casual", "formal"]
+
+  # Extended Accessories
+  handbag:
+    formality: "smart_casual"
+    occasions: ["casual_outing", "work_formal", "party", "date_night"]
+    seasons: ["spring", "summer", "fall", "winter"]
+    weather: ["warm", "cool", "cold", "hot"]
+    style_tags: ["chic", "minimal", "formal"]
+  backpack:
+    formality: "casual"
+    occasions: ["college", "casual_outing", "vacation"]
+    seasons: ["spring", "summer", "fall", "winter"]
+    weather: ["warm", "cool", "cold", "hot"]
+    style_tags: ["streetwear", "casual", "sporty"]
+  belt:
+    formality: "smart_casual"
+    occasions: ["work_formal", "casual_outing", "party"]
+    seasons: ["spring", "summer", "fall", "winter"]
+    weather: ["warm", "cool", "cold", "hot"]
+    style_tags: ["formal", "minimal"]
+  watch:
+    formality: "smart_casual"
+    occasions: ["work_formal", "casual_outing", "party", "date_night"]
+    seasons: ["spring", "summer", "fall", "winter"]
+    weather: ["warm", "cool", "cold", "hot"]
+    style_tags: ["formal", "chic", "minimal"]
+  bracelet:
+    formality: "casual"
+    occasions: ["casual_outing", "party", "festival"]
+    seasons: ["spring", "summer", "fall", "winter"]
+    weather: ["warm", "cool", "cold", "hot"]
+    style_tags: ["boho", "chic", "ethnic"]
+  sunglasses:
+    formality: "casual"
+    occasions: ["casual_outing", "vacation", "college"]
+    seasons: ["spring", "summer"]
+    weather: ["hot", "warm"]
+    style_tags: ["chic", "casual", "streetwear"]
+  cap:
+    formality: "casual"
+    occasions: ["casual_outing", "college", "gym_sports"]
+    seasons: ["spring", "summer", "fall"]
+    weather: ["warm", "hot"]
+    style_tags: ["streetwear", "sporty", "casual"]
+  scarf:
+    formality: "smart_casual"
+    occasions: ["casual_outing", "work_formal", "vacation"]
+    seasons: ["fall", "winter"]
+    weather: ["cool", "cold"]
+    style_tags: ["chic", "preppy", "vintage"]
+
+materials_weather_modifier:
+  cotton: ["hot", "warm"]
+  linen: ["hot", "warm"]
+  silk: ["warm", "cool"]
+  wool: ["cold", "cool"]
+  leather: ["cold", "cool", "windy"]
+  corduroy: ["cold", "cool"]
+  velvet: ["cold", "cool"]
+  knit: ["cold", "cool"]
+  denim: ["warm", "cool"]
+  chiffon_georgette: ["hot", "warm"]
+  polyester: ["warm", "cool"]
+  nylon: ["windy", "rainy"]

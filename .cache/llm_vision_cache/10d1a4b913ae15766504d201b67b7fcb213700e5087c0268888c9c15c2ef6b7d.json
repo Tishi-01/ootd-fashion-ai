@@ -1,0 +1,127 @@
+{
+  "person_count": 1,
+  "is_group_photo": false,
+  "has_no_person": false,
+  "rejection_reason": null,
+  "items": [
+    {
+      "box_2d": [
+        192.0,
+        366.0,
+        450.0,
+        641.0
+      ],
+      "name": "Maroon Cotton Shirt",
+      "label": "Shirt",
+      "category": "top",
+      "subcategory": "shirt",
+      "pattern": "plain",
+      "fit": "regular",
+      "silhouette": "straight",
+      "length": "regular",
+      "material": "cotton",
+      "formality": "smart_casual",
+      "color_primary": "maroon",
+      "color_secondary": null,
+      "layer": "inner",
+      "style_tags": [
+        "smart_casual",
+        "minimal"
+      ],
+      "occasions": [
+        "work_formal",
+        "casual_outing",
+        "date_night"
+      ],
+      "seasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "weather": [
+        "warm",
+        "cool"
+      ],
+      "confidence": 0.98
+    },
+    {
+      "box_2d": [
+        442.0,
+        401.0,
+        889.0,
+        603.0
+      ],
+      "name": "White Formal Trousers",
+      "label": "Trousers",
+      "category": "bottom",
+      "subcategory": "formal_trousers",
+      "pattern": "plain",
+      "fit": "tailored",
+      "silhouette": "straight",
+      "length": "ankle_length",
+      "material": "cotton",
+      "formality": "smart_casual",
+      "color_primary": "pure_white",
+      "color_secondary": null,
+      "layer": "base",
+      "style_tags": [
+        "smart_casual",
+        "minimal",
+        "formal"
+      ],
+      "occasions": [
+        "work_formal",
+        "date_night",
+        "casual_outing"
+      ],
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "weather": [
+        "warm",
+        "hot"
+      ],
+      "confidence": 0.97
+    },
+    {
+      "box_2d": [
+        890.0,
+        378.0,
+        965.0,
+        623.0
+      ],
+      "name": "Brown Leather Formal Shoes",
+      "label": "Formal Shoes",
+      "category": "footwear",
+      "subcategory": "formal_shoes",
+      "pattern": "plain",
+      "fit": "regular",
+      "silhouette": "straight",
+      "length": "regular",
+      "material": "leather",
+      "formality": "smart_casual",
+      "color_primary": "brown",
+      "color_secondary": null,
+      "layer": "base",
+      "style_tags": [
+        "smart_casual",
+        "formal"
+      ],
+      "occasions": [
+        "work_formal",
+        "date_night"
+      ],
+      "seasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "weather": [
+        "warm",
+        "cool"
+      ],
+      "confidence": 0.96
+    }
+  ]
+}

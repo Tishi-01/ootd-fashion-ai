@@ -1,0 +1,165 @@
+{
+  "person_count": 1,
+  "is_group_photo": false,
+  "has_no_person": false,
+  "rejection_reason": null,
+  "items": [
+    {
+      "box_2d": [
+        146.0,
+        188.0,
+        699.0,
+        838.0
+      ],
+      "name": "Printed Kurta",
+      "label": "Kurta",
+      "category": "top",
+      "subcategory": "kurta",
+      "pattern": "checkered",
+      "fit": "regular",
+      "silhouette": "straight",
+      "length": "longline",
+      "material": "cotton",
+      "formality": "semi_formal",
+      "color_primary": "charcoal_grey",
+      "color_secondary": "grey",
+      "layer": "inner",
+      "style_tags": [
+        "ethnic",
+        "festive"
+      ],
+      "occasions": [
+        "festival",
+        "wedding",
+        "party"
+      ],
+      "seasons": [
+        "spring",
+        "autumn",
+        "winter"
+      ],
+      "weather": [
+        "cool",
+        "warm"
+      ],
+      "confidence": 0.98
+    },
+    {
+      "box_2d": [
+        685.0,
+        416.0,
+        925.0,
+        691.0
+      ],
+      "name": "White Trousers",
+      "label": "Trousers",
+      "category": "bottom",
+      "subcategory": "trousers",
+      "pattern": "plain",
+      "fit": "slim",
+      "silhouette": "tapered",
+      "length": "ankle_length",
+      "material": "cotton",
+      "formality": "semi_formal",
+      "color_primary": "pure_white",
+      "color_secondary": null,
+      "layer": "base",
+      "style_tags": [
+        "ethnic",
+        "smart_casual"
+      ],
+      "occasions": [
+        "festival",
+        "wedding",
+        "party",
+        "casual_outing"
+      ],
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "weather": [
+        "warm",
+        "hot"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "box_2d": [
+        846.0,
+        482.0,
+        987.0,
+        655.0
+      ],
+      "name": "Embellished Juttis",
+      "label": "Juttis Mojaris",
+      "category": "footwear",
+      "subcategory": "juttis_mojaris",
+      "pattern": "checkered",
+      "fit": "regular",
+      "silhouette": "relaxed",
+      "length": "regular",
+      "material": "leather",
+      "formality": "semi_formal",
+      "color_primary": "black",
+      "color_secondary": "gold",
+      "layer": "outer",
+      "style_tags": [
+        "ethnic"
+      ],
+      "occasions": [
+        "festival",
+        "wedding",
+        "party"
+      ],
+      "seasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "weather": [
+        "warm",
+        "cool"
+      ],
+      "confidence": 0.92
+    },
+    {
+      "box_2d": [
+        85.0,
+        506.0,
+        113.0,
+        642.0
+      ],
+      "name": "Black Sunglasses",
+      "label": "Sunglasses",
+      "category": "accessory",
+      "subcategory": "sunglasses",
+      "pattern": "plain",
+      "fit": "regular",
+      "silhouette": "relaxed",
+      "length": "regular",
+      "material": "plastic",
+      "formality": "casual",
+      "color_primary": "black",
+      "color_secondary": null,
+      "layer": "outer",
+      "style_tags": [
+        "casual",
+        "chic"
+      ],
+      "occasions": [
+        "casual_outing",
+        "vacation"
+      ],
+      "seasons": [
+        "summer",
+        "spring"
+      ],
+      "weather": [
+        "hot",
+        "warm"
+      ],
+      "confidence": 0.94
+    }
+  ]
+}

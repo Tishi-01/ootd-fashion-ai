@@ -1,0 +1,167 @@
+{
+  "person_count": 1,
+  "is_group_photo": false,
+  "has_no_person": false,
+  "rejection_reason": null,
+  "items": [
+    {
+      "box_2d": [
+        163.0,
+        359.0,
+        481.0,
+        712.0
+      ],
+      "name": "Blue and White Graphic T-Shirt",
+      "label": "Graphic T-Shirt",
+      "category": "top",
+      "subcategory": "tshirt",
+      "pattern": "graphic",
+      "fit": "regular",
+      "silhouette": "relaxed",
+      "length": "regular",
+      "material": "cotton",
+      "formality": "casual",
+      "color_primary": "blue",
+      "color_secondary": "pure_white",
+      "layer": "base",
+      "style_tags": [
+        "casual",
+        "streetwear",
+        "sporty"
+      ],
+      "occasions": [
+        "casual_outing",
+        "college"
+      ],
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "weather": [
+        "warm",
+        "hot"
+      ],
+      "confidence": 0.98
+    },
+    {
+      "box_2d": [
+        466.0,
+        423.0,
+        907.0,
+        659.0
+      ],
+      "name": "Light Wash Faded Jeans",
+      "label": "Light Wash Jeans",
+      "category": "bottom",
+      "subcategory": "jeans",
+      "pattern": "distressed",
+      "fit": "baggy",
+      "silhouette": "relaxed",
+      "length": "ankle_length",
+      "material": "denim",
+      "formality": "casual",
+      "color_primary": "faded_denim",
+      "color_secondary": null,
+      "layer": "base",
+      "style_tags": [
+        "casual",
+        "streetwear",
+        "y2k"
+      ],
+      "occasions": [
+        "casual_outing",
+        "college"
+      ],
+      "seasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "weather": [
+        "warm",
+        "cool"
+      ],
+      "confidence": 0.97
+    },
+    {
+      "box_2d": [
+        876.0,
+        410.0,
+        936.0,
+        493.0
+      ],
+      "name": "White Sneakers",
+      "label": "White Sneakers",
+      "category": "footwear",
+      "subcategory": "sneakers",
+      "pattern": "colorblock",
+      "fit": "regular",
+      "silhouette": "relaxed",
+      "length": "regular",
+      "material": "leather",
+      "formality": "casual",
+      "color_primary": "pure_white",
+      "color_secondary": "grey",
+      "layer": "base",
+      "style_tags": [
+        "casual",
+        "streetwear"
+      ],
+      "occasions": [
+        "casual_outing",
+        "college"
+      ],
+      "seasons": [
+        "spring",
+        "summer",
+        "fall",
+        "winter"
+      ],
+      "weather": [
+        "warm",
+        "cool"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "box_2d": [
+        874.0,
+        510.0,
+        929.0,
+        598.0
+      ],
+      "name": "White Sneakers",
+      "label": "White Sneakers",
+      "category": "footwear",
+      "subcategory": "sneakers",
+      "pattern": "colorblock",
+      "fit": "regular",
+      "silhouette": "relaxed",
+      "length": "regular",
+      "material": "leather",
+      "formality": "casual",
+      "color_primary": "pure_white",
+      "color_secondary": "grey",
+      "layer": "base",
+      "style_tags": [
+        "casual",
+        "streetwear"
+      ],
+      "occasions": [
+        "casual_outing",
+        "college"
+      ],
+      "seasons": [
+        "spring",
+        "summer",
+        "fall",
+        "winter"
+      ],
+      "weather": [
+        "warm",
+        "cool"
+      ],
+      "confidence": 0.94
+    }
+  ]
+}

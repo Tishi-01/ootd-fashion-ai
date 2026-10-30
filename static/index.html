@@ -1,0 +1,2070 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>ootd — Curated Ensembles &amp; Digital Wardrobe</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Playfair+Display:ital,wght@0,500;0,600;1,400&amp;display=swap"
+    rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #FFFFFF;
+      color: #000000;
+      overflow-x: hidden;
+    }
+
+    /* Sidebar Pill Buttons matching Frame 2.svg */
+    .sidebar-pill {
+      background: #F5F5F5;
+      border-radius: 20px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.14);
+      transition: all 0.2s ease;
+    }
+
+    .sidebar-pill:hover {
+      transform: translateY(-1px);
+      box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.18);
+    }
+
+    .sidebar-pill.active-nav {
+      background: rgba(138, 244, 93, 0.34);
+    }
+
+    .sidebar-icon-box {
+      border-radius: 18px;
+      box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.45);
+    }
+
+    /* Green "Generate an outfit" Button — turns Grey while pressed until release, Green otherwise */
+    .btn-generate-outfit {
+      position: relative;
+      border-radius: 9999px;
+      background: rgba(138, 244, 93, 0.42);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      box-shadow: 0px 6px 20px rgba(70, 128, 45, 0.16), inset 0px 2px 6px rgba(255, 255, 255, 0.75);
+      border: 1.5px solid #69C044;
+      overflow: hidden;
+      transition: background-color 0.08s ease, border-color 0.08s ease, transform 0.12s ease, box-shadow 0.12s ease;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .btn-generate-outfit::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url('/static/ui_assets/btn_glass_texture.png');
+      background-size: cover;
+      background-position: center;
+      mix-blend-mode: soft-light;
+      opacity: 0.45;
+      pointer-events: none;
+    }
+
+    .btn-generate-outfit:hover {
+      background: rgba(138, 244, 93, 0.56);
+      transform: scale(1.02);
+      border-color: #46802D;
+      box-shadow: 0px 8px 24px rgba(70, 128, 45, 0.24), inset 0px 2px 8px rgba(255, 255, 255, 0.85);
+    }
+
+    .btn-generate-outfit:active,
+    .btn-generate-outfit.is-pressing {
+      background: #D4D4D8 !important;
+      border-color: #9CA3AF !important;
+      box-shadow: inset 0px 2px 6px rgba(0, 0, 0, 0.16) !important;
+      transform: scale(0.98);
+    }
+
+    .btn-generate-outfit:active::before,
+    .btn-generate-outfit.is-pressing::before {
+      opacity: 0.15;
+    }
+
+    /* Pillar Cards in Curated Ensembles box */
+    .pillar-card {
+      background: #FFFFFF;
+      border-radius: 16px;
+      border: 2px solid transparent;
+      transition: all 0.2s ease;
+      box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .pillar-card:hover {
+      box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.07);
+    }
+
+    .pillar-card.pillar-active {
+      border-color: #69C044;
+    }
+
+    /* Floating Cutout Garment Drop Shadows */
+    .garment-cutout-shadow {
+      filter: drop-shadow(0px 10px 12px rgba(0, 0, 0, 0.22));
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .outfit-pastel-card:hover .garment-cutout-shadow {
+      transform: translateY(-4px) scale(1.03);
+    }
+
+    /* View Pill Button inside Pastel Outfit Card */
+    .btn-view-pill {
+      background: #F5F5F5;
+      border-radius: 9999px;
+      box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+      transition: all 0.2s ease;
+    }
+
+    .btn-view-pill:hover {
+      background: #FFFFFF;
+      transform: translateY(-1px);
+      box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.26);
+    }
+  </style>
+</head>
+
+<body class="bg-white text-black antialiased">
+
+  <!-- Toast Portal -->
+  <div class="fixed top-6 right-6 z-50 flex flex-col space-y-2 pointer-events-none" id="toast-portal"></div>
+
+  <!-- Outfit Details Modal (Opened by clicking "View" on any Outfit Card) -->
+  <div class="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm hidden items-center justify-center p-4"
+    id="outfit-detail-modal" onclick="if(event.target===this) closeOutfitModal()">
+    <div
+      class="bg-white rounded-[28px] max-w-2xl w-full p-7 shadow-2xl border border-neutral-200 space-y-6 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-start justify-between gap-4 border-b border-neutral-200 pb-4">
+        <div>
+          <span class="px-3 py-1 rounded-full bg-[#8AF45D]/35 text-black font-semibold text-xs uppercase tracking-wider"
+            id="modal-outfit-score">96% Harmony</span>
+          <h3 class="text-2xl font-bold text-black mt-2" id="modal-outfit-title">Outfit #1 Breakdown</h3>
+        </div>
+        <button class="p-2 rounded-full hover:bg-neutral-100 text-neutral-600 hover:text-black transition"
+          onclick="closeOutfitModal()" type="button">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <!-- Garment Pieces Grid -->
+      <div>
+        <h4 class="text-xs font-bold uppercase tracking-wider text-neutral-500 mb-3">Selected Wardrobe Pieces</h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="modal-outfit-items"></div>
+      </div>
+
+      <!-- Pillar Harmony Breakdown -->
+      <div>
+        <h4 class="text-xs font-bold uppercase tracking-wider text-neutral-500 mb-2">Active Pillar Scores</h4>
+        <div class="flex flex-wrap gap-2" id="modal-outfit-pillars"></div>
+      </div>
+
+      <!-- Why This Works -->
+      <div class="bg-[#F5F5F5] rounded-2xl p-4 space-y-1.5">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-neutral-600">Stylist Notes</h4>
+        <ul class="text-sm text-neutral-800 space-y-1 list-disc list-inside" id="modal-outfit-reasons"></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- POP-UP MODAL: ADD CLOTHING FROM A PHOTO (FULL VIEWPORT BACKDROP, NO TOP WHITE GAP) -->
+  <div
+    class="fixed inset-0 z-50 bg-black/55 backdrop-blur-sm hidden items-center justify-center p-4 sm:p-6 overflow-y-auto"
+    id="detection-panel-container" onclick="if(event.target===this) toggleDetectionPanel(false)">
+    <section
+      class="bg-[#F8F6F0] rounded-[32px] p-6 sm:p-8 border border-[#E3DED2] shadow-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto my-auto transition-all duration-300"
+      id="detection-modal-box">
+      <div class="flex items-center justify-between pb-4 border-b border-[#E3DED2] mb-6">
+        <div>
+          <h2 class="text-xl font-bold text-[#292D28]">Add Clothing From a Photo</h2>
+          <p class="text-sm text-neutral-600">Upload a single-person outfit photo to detect individual clothing items
+            and save them to your wardrobe.</p>
+        </div>
+        <button class="p-2 rounded-full hover:bg-[#EEE9DE] text-neutral-600 hover:text-black transition"
+          onclick="toggleDetectionPanel(false)" title="Close" type="button">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start" id="detection-grid-layout">
+        <!-- Upload / Outfit Column: Centered full-width initially, moves to Left (lg:col-span-5) when uploaded -->
+        <div class="lg:col-span-12 flex flex-col space-y-4 transition-all duration-300" id="detection-left-col">
+          <div class="hidden items-center justify-between" id="your-outfit-header">
+            <h3 class="text-lg font-bold text-[#292D28]">Your Outfit</h3>
+            <button class="text-xs font-semibold text-[#34483A] hover:underline flex items-center gap-1 cursor-pointer"
+              onclick="document.getElementById('file-input').click()" type="button">
+              <span class="material-symbols-outlined text-[15px]">upload</span>
+              <span>Change photo</span>
+            </button>
+          </div>
+
+          <!-- Image Dropzone / Canvas Container -->
+          <div
+            class="relative bg-[#EEE9DE] rounded-2xl p-4 border border-[#E3DED2] overflow-hidden flex flex-col items-center justify-center transition-all"
+            id="dropzone">
+            <input accept="image/*" class="hidden" id="file-input" type="file">
+
+            <!-- Initial Centered Big Upload Button -->
+            <div
+              class="w-full py-16 px-6 flex flex-col items-center justify-center text-center cursor-pointer space-y-4"
+              id="upload-empty-prompt" onclick="document.getElementById('file-input').click()">
+              <div
+                class="w-20 h-20 rounded-full bg-[#FFFEFA] flex items-center justify-center text-[#34483A] shadow-md hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined text-[38px]">add_photo_alternate</span>
+              </div>
+              <div class="space-y-1">
+                <p class="text-lg font-bold text-[#292D28]">Upload an outfit photo</p>
+                <p class="text-xs text-neutral-600">Drag and drop a photo here, or click below to browse</p>
+              </div>
+              <span
+                class="mt-2 px-8 py-3 rounded-full bg-[#34483A] hover:bg-[#25352a] text-white text-sm font-bold uppercase tracking-wider shadow-sm transition">
+                Choose Photo
+              </span>
+            </div>
+
+            <!-- Uploaded Image + Subtle Sage-Green Bounding Boxes -->
+            <div class="relative w-full hidden items-center justify-center bg-[#FFFEFA] rounded-xl overflow-hidden"
+              id="preview-stage">
+              <img alt="Uploaded outfit" class="w-full h-auto max-h-[520px] object-contain block select-none"
+                id="main-outfit-img" src="">
+              <canvas class="absolute inset-0 w-full h-full pointer-events-auto" id="preview-canvas"></canvas>
+
+              <!-- Subtle Loading State -->
+              <div
+                class="absolute inset-0 bg-[#F8F6F0]/85 backdrop-blur-sm hidden items-center justify-center flex-col space-y-3 p-6 text-center"
+                id="detection-spinner">
+                <div class="w-8 h-8 rounded-full border-2 border-[#34483A] border-t-transparent animate-spin"></div>
+                <span class="text-sm font-semibold text-[#292D28]">Looking for individual clothing items…</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Panel: Items We Found (Hidden initially; appears on the right once a photo is uploaded) -->
+        <div class="lg:col-span-7 hidden flex-col space-y-4" id="detection-right-col">
+          <div>
+            <div class="flex items-center gap-3">
+              <h3 class="text-lg font-bold text-[#292D28]">Items We Found</h3>
+              <span class="px-2.5 py-0.5 rounded-full bg-[#8AF45D]/35 text-black text-xs font-semibold hidden"
+                id="detected-counter-badge">0 items found</span>
+            </div>
+            <p class="text-sm text-neutral-600 mt-0.5">Review the pieces detected in your photo and add them to your
+              wardrobe.</p>
+          </div>
+
+          <!-- Batch Selection Toolbar -->
+          <div
+            class="p-4 rounded-2xl bg-[#EEE9DE] hidden flex-wrap items-center justify-between gap-4 border border-[#E3DED2]"
+            id="batch-action-toolbar">
+            <label class="flex items-center gap-2.5 cursor-pointer select-none">
+              <input checked class="w-4 h-4 rounded text-[#34483A] focus:ring-0 cursor-pointer" id="select-all-checkbox"
+                type="checkbox">
+              <span class="text-sm font-semibold text-[#292D28]" id="selected-count-label">All items selected</span>
+            </label>
+            <button
+              class="px-5 py-2.5 rounded-full bg-[#34483A] hover:opacity-95 text-white text-sm font-semibold flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed transition"
+              id="btn-batch-add" onclick="addBatchToWardrobe()" type="button">
+              <span class="material-symbols-outlined text-[18px]">add_task</span>
+              <span id="batch-btn-label">Add Selected to Wardrobe</span>
+            </button>
+          </div>
+
+          <!-- Save Confirmation Message -->
+          <div
+            class="hidden p-3.5 rounded-xl bg-[#8AF45D]/30 border border-[#69C044] text-black text-sm font-medium items-center justify-between"
+            id="detection-save-confirmation">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-[18px] text-[#34483A]">check_circle</span>
+              <span id="detection-save-confirmation-text">Items added to your wardrobe.</span>
+            </div>
+          </div>
+
+          <!-- Detected Garment Cards Container -->
+          <div class="flex flex-col space-y-3.5" id="detected-cards-container"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MAIN APP LAYOUT MATCHING FRAME 2.SVG (FIXED LEFT SIDEBAR + SCROLL RIGHT)  -->
+  <!-- ========================================================================= -->
+  <div class="max-w-[1560px] mx-auto px-5 sm:px-8 lg:px-10 py-7 flex flex-col lg:flex-row gap-8 min-h-screen">
+
+    <!-- FIXED LEFT SIDEBAR (Logo + 3 Pill Navigation Buttons: Home, My wardrobe, My Profile) -->
+    <aside
+      class="w-full lg:w-[255px] lg:fixed lg:top-0 lg:left-0 lg:h-screen lg:pl-9 lg:pr-5 lg:py-8 bg-white z-30 shrink-0 flex flex-row lg:flex-col items-center lg:items-start justify-between lg:justify-start gap-4">
+      <!-- Calligraphic "ootd" Vector Logo from Frame 2.svg -->
+      <a class="block cursor-pointer select-none lg:mt-1 lg:mb-24 lg:ml-3" onclick="switchTab('ootd')"
+        title="ootd Home">
+        <img alt="ootd" class="w-[115px] sm:w-[138px] h-auto block" src="/static/ui_assets/ootd_logo.svg">
+      </a>
+
+      <!-- Navigation Stack (Home, My wardrobe, My Profile) -->
+      <nav class="flex flex-row lg:flex-col gap-3.5 w-full overflow-x-auto lg:overflow-visible py-1" id="main-nav-tabs">
+        <!-- Home Button -->
+        <button
+          class="nav-tab-btn sidebar-pill active-nav w-full min-w-[165px] px-3 py-2.5 flex items-center gap-3.5 text-left"
+          data-tab="ootd" onclick="switchTab('ootd')" type="button">
+          <div class="w-14 h-12 rounded-[16px] flex items-center justify-center shrink-0 overflow-hidden">
+            <img alt="Home" class="w-13 h-12 object-contain scale-x-[-1]" src="/static/ui_assets/image1_83_3.png">
+          </div>
+          <span class="font-bold text-[15px] text-black">Home</span>
+        </button>
+
+        <!-- My Wardrobe Button -->
+        <button class="nav-tab-btn sidebar-pill w-full min-w-[180px] px-3 py-2.5 flex items-center gap-3 text-left"
+          data-tab="wardrobe" onclick="switchTab('wardrobe')" type="button">
+          <div class="w-14 h-12 rounded-[16px] flex items-center justify-center shrink-0 overflow-hidden">
+            <img alt="My wardrobe" class="w-14 h-12 object-cover scale-x-[-1]" src="/static/ui_assets/image0_83_3.png">
+          </div>
+          <div class="overflow-hidden">
+            <div class="font-bold text-[14.5px] text-black leading-tight truncate">My wardrobe</div>
+            <div class="text-[11.5px] font-medium text-neutral-400 mt-0.5" id="sidebar-wardrobe-count">43 items</div>
+          </div>
+        </button>
+
+        <!-- My Profile Button -->
+        <button class="nav-tab-btn sidebar-pill w-full min-w-[165px] px-3 py-2.5 flex items-center gap-3.5 text-left"
+          data-tab="profile" onclick="switchTab('profile')" type="button">
+          <div class="w-14 h-12 rounded-[16px] flex items-center justify-center shrink-0 overflow-hidden">
+            <img alt="My Profile" class="w-11 h-11 object-contain" src="/static/ui_assets/image11_83_3.png">
+          </div>
+          <span class="font-bold text-[15px] text-black">My Profile</span>
+        </button>
+      </nav>
+    </aside>
+
+    <!-- ======================================================================= -->
+    <!-- RIGHT MAIN CONTENT AREA (SCROLLABLE)                                    -->
+    <!-- ======================================================================= -->
+    <main class="flex-1 min-w-0 lg:ml-[245px]">
+
+      <!-- Notification Banner Container -->
+      <div class="mb-4 empty:hidden" id="alert-banner-container"></div>
+
+      <!-- ===================================================================== -->
+      <!-- TAB 1: HOME (EXACT FRAME 2.SVG UI)                                    -->
+      <!-- ===================================================================== -->
+      <div class="tab-pane w-full space-y-9" id="pane-ootd">
+
+        <!-- TOP HERO CONTAINER: Personal Greeting + 4 Pillars -->
+        <section class="w-full bg-[#EDEDED]/75 rounded-[38px] p-6 sm:p-8 lg:p-10 shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
+          <!-- Top Row: Greeting ("Hi <Profile Name>") + Engaging Subtitle + Green/Grey-on-Press "Generate an outfit" CTA -->
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div class="max-w-xl">
+              <h1 class="text-[32px] sm:text-[38px] font-bold text-black tracking-tight leading-tight">
+                Hi, <span id="hero-profile-name">Tanishk</span>!
+              </h1>
+              <p class="text-[14.5px] sm:text-[15.5px] font-semibold text-black/80 leading-[1.4] mt-1.5">
+                Choose the factors below to build your outfit — mix colour harmony, live weather, today's occasion, and
+                your lucky stars for a look styled just for you.
+              </p>
+            </div>
+
+            <button class="btn-generate-outfit px-10 py-4 shrink-0 self-start lg:self-center cursor-pointer"
+              id="run-recommend-btn" onclick="generateRecommendations(true)"
+              onpointercancel="this.classList.remove('is-pressing')" onpointerdown="this.classList.add('is-pressing')"
+              onpointerleave="this.classList.remove('is-pressing')" onpointerup="this.classList.remove('is-pressing')"
+              type="button">
+              <span class="relative z-10 text-[18px] sm:text-[20px] font-bold text-black tracking-tight">Generate an
+                outfit</span>
+            </button>
+          </div>
+
+          <!-- Hidden Checkboxes Preserving Exact State Contracts -->
+          <input checked class="hidden" disabled id="check-pillar-color" type="checkbox">
+          <input class="hidden" id="check-pillar-weather" type="checkbox">
+          <input class="hidden" id="check-pillar-occasion" type="checkbox">
+          <input class="hidden" id="check-pillar-astro" type="checkbox">
+          <input id="input-temp-override" type="hidden" value="">
+
+          <!-- Bottom Row: 4 Pillar Cards matching Frame 2.svg -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-5 mt-8">
+
+            <!-- Card 1: Colour Harmony (Always On) -->
+            <div class="pillar-card pillar-active px-5 py-5 flex items-center gap-4 select-none" id="box-pillar-color"
+              title="Colour Harmony is always active as the core styling foundation">
+              <img alt="Colour Harmony" class="w-12 h-12 object-contain shrink-0"
+                src="/static/ui_assets/image5_83_3.png">
+              <div class="min-w-0">
+                <h2 class="text-[16.5px] font-bold text-black leading-snug">Colour Harmony</h2>
+                <p class="text-[12.5px] font-medium text-black/80 leading-snug mt-1">
+                  Curated colour coded combination of outfits
+                </p>
+              </div>
+            </div>
+
+            <!-- Card 2: Weather & Season (Click to Toggle: B&W -> Colorful) -->
+            <div class="pillar-card px-5 py-5 flex items-center gap-4 cursor-pointer select-none"
+              id="box-pillar-weather" onclick="togglePillarCard('weather')">
+              <img alt="Weather & Season" class="w-12 h-12 object-contain shrink-0 transition-transform duration-200"
+                id="icon-pillar-weather" src="/static/ui_assets/image6_83_3.png">
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center justify-between gap-1">
+                  <h2 class="text-[16.5px] font-bold text-black leading-snug">Weather &amp; Season</h2>
+                </div>
+                <p class="text-[12.5px] font-medium text-black/80 leading-snug mt-1" id="live-weather-status">
+                  Thermal Layering logic
+                </p>
+                <!-- Subtle Quick Temperature Pills (Stop propagation so user can test Cold/Live/Hot) -->
+                <div class="flex items-center gap-1 mt-2" onclick="event.stopPropagation()">
+                  <button
+                    class="temp-pill px-2 py-0.5 rounded bg-neutral-100 hover:bg-neutral-200 text-[10.5px] font-semibold text-neutral-700 transition"
+                    onclick="setTempPreset(11, this)" type="button">11°C</button>
+                  <button
+                    class="temp-pill px-2 py-0.5 rounded bg-neutral-100 hover:bg-neutral-200 text-[10.5px] font-semibold text-neutral-700 transition"
+                    onclick="setTempPreset(20, this)" type="button">20°C</button>
+                  <button
+                    class="temp-pill px-2 py-0.5 rounded bg-neutral-100 hover:bg-neutral-200 text-[10.5px] font-semibold text-neutral-700 transition"
+                    onclick="setTempPreset(32, this)" type="button">32°C</button>
+                  <button
+                    class="temp-pill px-2 py-0.5 rounded bg-black text-white text-[10.5px] font-semibold transition"
+                    onclick="setTempPreset(null, this)" type="button">Live</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 3: Occasion and Tone (Click to Toggle: B&W -> Colorful) -->
+            <div class="pillar-card px-5 py-5 flex items-center gap-4 cursor-pointer select-none"
+              id="box-pillar-occasion" onclick="togglePillarCard('occasion')">
+              <img alt="Occasion and Tone" class="w-12 h-12 object-contain shrink-0 transition-transform duration-200"
+                id="icon-pillar-occasion" src="/static/ui_assets/image7_83_3.png">
+              <div class="min-w-0 flex-1">
+                <h2 class="text-[16.5px] font-bold text-black leading-snug mb-2">Occasion and Tone</h2>
+                <div onclick="event.stopPropagation()">
+                  <select
+                    class="w-full bg-[#ECECEC] rounded-[8px] px-3 py-1.5 text-[13px] font-medium text-black border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-[#69C044] cursor-pointer"
+                    id="select-occasion" onchange="onOccasionDropdownChange()">
+                    <option value="festival">Ethnic</option>
+                    <option value="casual_outing" selected>Casual Outing</option>
+                    <option value="work_formal">Work / Formal</option>
+                    <option value="party">Party / Night Out</option>
+                    <option value="date_night">Date Night</option>
+                    <option value="wedding">Wedding</option>
+                    <option value="college">College</option>
+                    <option value="gym_sports">Gym / Sports</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 4: Astro Signature (Click to Toggle: B&W -> Colorful) -->
+            <div class="pillar-card px-5 py-5 flex items-center gap-4 cursor-pointer select-none" id="box-pillar-astro"
+              onclick="togglePillarCard('astro')">
+              <img alt="Astro Signature" class="w-12 h-12 object-contain shrink-0 transition-transform duration-200"
+                id="icon-pillar-astro" src="/static/ui_assets/image8_83_3.png">
+              <div class="min-w-0 flex-1">
+                <h2 class="text-[16.5px] font-bold text-black leading-snug">Astro Signature</h2>
+                <p class="text-[12.5px] font-medium text-black/80 leading-snug mt-1" id="astro-pillar-details">
+                  Based on your selected birth star
+                </p>
+                <div class="flex items-center gap-1.5 mt-1.5" id="astro-pillar-swatches"></div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- BOTTOM SECTION: Recommended outfits for the day -->
+        <section id="top-outfits-section">
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-[26px] sm:text-[30px] font-bold text-black tracking-tight">Recommended outfits for the day
+            </h2>
+            <span class="text-xs font-semibold uppercase tracking-wider text-neutral-500"
+              id="active-pillars-count-badge">1 Pillar Active</span>
+          </div>
+
+          <!-- Pastel Outfit Cards Grid (#1 Sky Blue, #2 Soft Peach, #3 Mint, #4 Lavender) -->
+          <div class="grid grid-cols-1 xl:grid-cols-2 gap-8" id="recommendation-results-container">
+            <div
+              class="col-span-full rounded-[34px] bg-[#F6F6F6] border border-neutral-200/80 p-10 sm:p-14 text-center space-y-2.5">
+              <p class="text-[18px] sm:text-[20px] font-bold text-black">Ready to style your look?</p>
+              <p class="text-sm font-medium text-neutral-600 max-w-md mx-auto">
+                Pick the factors you want above and press <span class="font-bold text-black">Generate an outfit</span>
+                to reveal your curated ensembles for today.
+              </p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- ===================================================================== -->
+      <!-- TAB 2: MY WARDROBE (43-ITEM DIGITAL WARDROBE + POPUP GARMENT SCANNER) -->
+      <!-- ===================================================================== -->
+      <div class="tab-pane w-full hidden space-y-8" id="pane-wardrobe">
+
+        <!-- Wardrobe Header Banner (Only "+ Add Outfit Photo" button) -->
+        <section
+          class="bg-[#EDEDED]/75 rounded-[32px] p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div>
+            <div class="flex items-center gap-3">
+              <h1 class="text-[30px] sm:text-[34px] font-bold text-black tracking-tight">My Digital Wardrobe</h1>
+              <span class="px-3.5 py-1 rounded-full bg-white text-black font-semibold text-xs shadow-sm"
+                id="wardrobe-count">43 items</span>
+            </div>
+            <p class="text-sm font-medium text-neutral-700 mt-1">
+              Manage your clothing collection or upload an outfit photo to detect and add individual pieces.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <button class="btn-generate-outfit px-6 py-3 flex items-center gap-2 cursor-pointer"
+              id="btn-toggle-add-drawer" onclick="toggleDetectionPanel(true)"
+              onpointercancel="this.classList.remove('is-pressing')" onpointerdown="this.classList.add('is-pressing')"
+              onpointerleave="this.classList.remove('is-pressing')" onpointerup="this.classList.remove('is-pressing')"
+              type="button">
+              <span class="material-symbols-outlined text-[19px] relative z-10">add_a_photo</span>
+              <span class="relative z-10 font-bold text-sm text-black" id="btn-add-garments-text">+ Add Outfit
+                Photo</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Search + Category Chips + Sort Bar (Brought Directly Above Wardrobe Grid) -->
+        <section class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div class="flex items-center overflow-x-auto pb-1 gap-2" id="category-filter-chips">
+            <button
+              class="category-chip px-4 py-2 rounded-full text-sm font-semibold transition whitespace-nowrap bg-black text-white"
+              data-category="all" onclick="filterWardrobe('all', this)">
+              All (<span id="count-cat-all">0</span>)
+            </button>
+            <button
+              class="category-chip px-4 py-2 rounded-full text-sm font-semibold transition whitespace-nowrap bg-[#F5F5F5] text-neutral-700 hover:bg-neutral-200"
+              data-category="top" onclick="filterWardrobe('top', this)">
+              Tops (<span id="count-cat-top">0</span>)
+            </button>
+            <button
+              class="category-chip px-4 py-2 rounded-full text-sm font-semibold transition whitespace-nowrap bg-[#F5F5F5] text-neutral-700 hover:bg-neutral-200"
+              data-category="bottom" onclick="filterWardrobe('bottom', this)">
+              Bottoms (<span id="count-cat-bottom">0</span>)
+            </button>
+            <button
+              class="category-chip px-4 py-2 rounded-full text-sm font-semibold transition whitespace-nowrap bg-[#F5F5F5] text-neutral-700 hover:bg-neutral-200"
+              data-category="overtop" onclick="filterWardrobe('overtop', this)">
+              Outerwear (<span id="count-cat-overtop">0</span>)
+            </button>
+            <button
+              class="category-chip px-4 py-2 rounded-full text-sm font-semibold transition whitespace-nowrap bg-[#F5F5F5] text-neutral-700 hover:bg-neutral-200"
+              data-category="footwear" onclick="filterWardrobe('footwear', this)">
+              Footwear (<span id="count-cat-footwear">0</span>)
+            </button>
+            <button
+              class="category-chip px-4 py-2 rounded-full text-sm font-semibold transition whitespace-nowrap bg-[#F5F5F5] text-neutral-700 hover:bg-neutral-200"
+              data-category="accessory" onclick="filterWardrobe('accessory', this)">
+              Accessories (<span id="count-cat-accessory">0</span>)
+            </button>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <div class="relative flex-1 sm:w-64">
+              <span
+                class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400 text-[18px]">search</span>
+              <input
+                class="w-full bg-[#F5F5F5] pl-10 pr-4 py-2 rounded-full text-sm text-black placeholder:text-neutral-400 border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-[#69C044]"
+                id="garment-search-input" oninput="handleSearch(this.value)" placeholder="Search wardrobe…" type="text">
+            </div>
+            <select
+              class="bg-[#F5F5F5] text-black text-sm font-medium pl-4 pr-8 py-2 rounded-full border border-neutral-200 cursor-pointer focus:outline-none"
+              id="garment-sort-select" onchange="sortGarments(this.value)">
+              <option value="recent">Recently Added</option>
+              <option value="formality">Formality</option>
+              <option value="color">Color</option>
+              <option value="name">Name</option>
+            </select>
+          </div>
+        </section>
+
+        <!-- Wardrobe Grid (Directly Visible Above) -->
+        <section>
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-5" id="wardrobe-grid-container">
+          </div>
+
+          <div class="hidden flex-col items-center justify-center py-16 text-center space-y-3 bg-[#F5F5F5] rounded-3xl"
+            id="wardrobe-empty-state">
+            <span class="material-symbols-outlined text-[32px] text-neutral-500">filter_list_off</span>
+            <h4 class="text-lg font-bold text-black">No matching items found</h4>
+            <button class="px-5 py-2 rounded-full bg-black text-white text-sm font-semibold" onclick="resetFilters()"
+              type="button">Reset Filters</button>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- ===================================================================== -->
+      <!-- TAB 3: MY PROFILE (NAME, DOB, CITY & LUCKY COLOR SWATCHES)            -->
+      <!-- ===================================================================== -->
+      <div class="tab-pane w-full hidden" id="pane-profile">
+        <section class="max-w-3xl bg-[#EDEDED]/75 rounded-[36px] p-6 sm:p-10 space-y-8">
+          <div class="flex flex-col sm:flex-row items-center sm:items-start gap-5 border-b border-neutral-300 pb-6">
+            <div
+              class="w-20 h-20 rounded-full bg-white shadow-md flex items-center justify-center overflow-hidden shrink-0">
+              <img alt="Profile" class="w-16 h-16 object-contain" src="/static/ui_assets/image11_83_3.png">
+            </div>
+            <div class="text-center sm:text-left">
+              <h1 class="text-2xl sm:text-3xl font-bold text-black" id="prof-card-title">Tanishk</h1>
+              <p class="text-sm font-medium text-neutral-600 mt-0.5" id="prof-card-location">Residence · Mumbai</p>
+              <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 mt-3">
+                <span class="px-3 py-1 rounded-full bg-white text-xs font-semibold text-black shadow-sm"
+                  id="prof-planet-title">Birth Planet</span>
+                <span class="px-3 py-1 rounded-full bg-[#8AF45D]/35 text-xs font-semibold text-black"
+                  id="prof-planet-sub">Daily Lucky Shades</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div class="space-y-1.5">
+              <label class="text-xs font-bold uppercase tracking-wider text-neutral-600" for="prof-name">Your
+                Name</label>
+              <input
+                class="w-full bg-white rounded-2xl px-4 py-3 text-black font-medium border border-neutral-300 focus:ring-2 focus:ring-[#69C044]"
+                id="prof-name" type="text" value="Tanishk">
+            </div>
+            <div class="space-y-1.5">
+              <label class="text-xs font-bold uppercase tracking-wider text-neutral-600" for="prof-dob">Date of
+                Birth</label>
+              <input
+                class="w-full bg-white rounded-2xl px-4 py-3 text-black font-medium border border-neutral-300 focus:ring-2 focus:ring-[#69C044]"
+                id="prof-dob" type="date" value="2003-05-15">
+            </div>
+            <div class="space-y-1.5">
+              <label class="text-xs font-bold uppercase tracking-wider text-neutral-600" for="prof-city">City (Live
+                Weather)</label>
+              <input
+                class="w-full bg-white rounded-2xl px-4 py-3 text-black font-medium border border-neutral-300 focus:ring-2 focus:ring-[#69C044]"
+                id="prof-city" type="text" value="Mumbai">
+            </div>
+          </div>
+
+          <!-- Planetary Lucky Shades Card -->
+          <div class="bg-white rounded-2xl p-6 space-y-4 shadow-sm">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <img alt="Astro" class="w-8 h-8 object-contain" src="/static/ui_assets/image8_83_3.png">
+                <h3 class="font-bold text-base text-black">Your Birth Star &amp; Daily Lucky Shades</h3>
+              </div>
+              <span class="text-xs font-semibold text-neutral-500">Vedic Planetary Alignment</span>
+            </div>
+            <p class="text-sm text-neutral-600" id="prof-astro-description">
+              Calculated from your date of birth and today's ruling planetary transit:
+            </p>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="prof-swatches"></div>
+          </div>
+
+          <div class="flex items-center justify-end gap-3">
+            <button
+              class="px-5 py-2.5 rounded-full bg-white hover:bg-neutral-100 text-neutral-700 font-semibold text-sm shadow-sm transition"
+              onclick="resetProfileForm()" type="button">
+              Reset Defaults
+            </button>
+            <button class="btn-generate-outfit px-8 py-3 cursor-pointer" id="save-profile-btn"
+              onclick="saveProfileData()" type="button">
+              <span class="relative z-10 font-bold text-sm text-black">Save Profile</span>
+            </button>
+          </div>
+        </section>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    // =========================================================================
+    // GLOBAL STATE & HELPERS
+    // =========================================================================
+    let currentGarments = [];
+    let wardrobeArchive = [];
+    let currentRecommendations = [];
+    let likedOutfits = new Set();
+    let hoveredGarmentIndex = null;
+    let activeWardrobeCategory = "all";
+    let searchQuery = "";
+    let currentSort = "recent";
+    let activeTab = "ootd";
+    let lastUploadedFile = null;
+    let cachedWeather = null;
+    let cachedAstrology = null;
+
+    function getColorHex(shade) {
+      if (!shade) return "#7D9276";
+      const clean = String(shade).toLowerCase().trim().replace(/\s+/g, "_");
+      const map = {
+        pure_white: "#FFFFFF",
+        white: "#FAFAF8",
+        off_white: "#F4F0EA",
+        cream: "#F5F2EB",
+        ivory: "#F7F4EB",
+        black: "#181818",
+        jet_black: "#111111",
+        charcoal_grey: "#363839",
+        charcoal: "#363839",
+        grey: "#808080",
+        light_grey: "#CCCCCC",
+        heather_grey: "#9C9B98",
+        olive_green: "#556B2F",
+        olive: "#596052",
+        sage_green: "#7D9276",
+        emerald_green: "#2E6F40",
+        mint: "#98FF98",
+        dark_navy: "#162238",
+        navy: "#1B2A4A",
+        navy_blue: "#1B2A4A",
+        royal_blue: "#2B547E",
+        sky_blue: "#87CEEB",
+        cobalt_blue: "#2563EB",
+        indigo_denim: "#1E3A5F",
+        faded_denim: "#6082B6",
+        blue: "#2B60DE",
+        khaki: "#C3B091",
+        camel: "#C19A6B",
+        mustard: "#D4AF37",
+        gold: "#D4AF37",
+        yellow: "#EAB308",
+        orange: "#EA580C",
+        red: "#DC2626",
+        pink: "#F4C2C2",
+        baby_pink: "#F4C2C2",
+        lavender: "#E6E6FA",
+        teal: "#0F766E",
+        burgundy: "#6E1E2A",
+        maroon: "#651C23",
+        rust: "#9A3412",
+        beige: "#E5DEC9",
+        tan: "#C19A6B",
+        brown: "#5C3A21",
+        espresso: "#2B1D14"
+      };
+      return map[clean] || "#7D9276";
+    }
+
+    function formatLabel(str) {
+      if (!str) return "";
+      return String(str)
+        .replace(/_/g, " ")
+        .replace(/\b\w/g, c => c.toUpperCase());
+    }
+
+    function formatCategoryLabel(cat, subcat) {
+      if (subcat) return formatLabel(subcat);
+      const map = {
+        top: "Top",
+        bottom: "Bottom",
+        overtop: "Outerwear",
+        footwear: "Footwear",
+        accessory: "Accessory",
+        one_piece: "One Piece"
+      };
+      return map[(cat || "").toLowerCase()] || formatLabel(cat || "Garment");
+    }
+
+    // Map wardrobe image URLs to their transparent cutout PNGs for the Frame 2.svg pastel collage cards
+    function getCutoutUrl(it) {
+      const raw = it.ghost_transparent_url || it.ghost_mannequin_url || it.image_url || "";
+      if (raw.includes("/static/predefined_wardrobe/")) {
+        const fname = raw.split("/").pop().split("?")[0].replace(/\.(jpg|jpeg|png)$/i, ".png");
+        return `/static/predefined_wardrobe_cutout/${fname}?v=3`;
+      }
+      return raw ? `${raw}?v=3` : "";
+    }
+
+    // =========================================================================
+    // SIDEBAR NAVIGATION & TAB SWITCHING
+    // =========================================================================
+    function switchTab(tabName) {
+      activeTab = tabName;
+      ["ootd", "wardrobe", "profile"].forEach(pane => {
+        const el = document.getElementById(`pane-${pane}`);
+        if (el) el.classList.toggle("hidden", pane !== tabName);
+      });
+
+      document.querySelectorAll(".nav-tab-btn").forEach(btn => {
+        const target = btn.getAttribute("data-tab");
+        btn.classList.toggle("active-nav", target === tabName);
+      });
+
+      if (tabName === "wardrobe") {
+        renderWardrobeGrid();
+      } else {
+        toggleDetectionPanel(false);
+      }
+    }
+
+    function toggleDetectionPanel(forceState) {
+      const panel = document.getElementById("detection-panel-container");
+      if (!panel) return;
+
+      const isHidden = panel.classList.contains("hidden");
+      const shouldShow = forceState !== undefined ? forceState : isHidden;
+
+      if (shouldShow) {
+        panel.classList.remove("hidden");
+        panel.classList.add("flex");
+        document.body.style.overflow = "hidden";
+        setTimeout(drawGarmentBoxes, 100);
+      } else {
+        panel.classList.add("hidden");
+        panel.classList.remove("flex");
+        document.body.style.overflow = "";
+        resetDetectionModal();
+      }
+    }
+
+    // Toggles the modal between "big centered upload button" and "photo left + extracted items right"
+    function setDetectionLayout(uploaded) {
+      const box = document.getElementById("detection-modal-box");
+      const leftCol = document.getElementById("detection-left-col");
+      const rightCol = document.getElementById("detection-right-col");
+      const header = document.getElementById("your-outfit-header");
+
+      if (box) {
+        box.classList.toggle("max-w-xl", !uploaded);
+        box.classList.toggle("max-w-5xl", uploaded);
+      }
+      if (leftCol) {
+        leftCol.classList.toggle("lg:col-span-12", !uploaded);
+        leftCol.classList.toggle("lg:col-span-5", uploaded);
+      }
+      if (rightCol) {
+        rightCol.classList.toggle("hidden", !uploaded);
+        rightCol.classList.toggle("flex", uploaded);
+      }
+      if (header) {
+        header.classList.toggle("hidden", !uploaded);
+        header.classList.toggle("flex", uploaded);
+      }
+    }
+
+    function resetDetectionModal() {
+      if (isBatchSaving) return;
+      currentGarments = [];
+      lastUploadedFile = null;
+
+      const emptyPrompt = document.getElementById("upload-empty-prompt");
+      const previewStage = document.getElementById("preview-stage");
+      const mainImg = document.getElementById("main-outfit-img");
+      const fileInput = document.getElementById("file-input");
+      const cards = document.getElementById("detected-cards-container");
+      const badge = document.getElementById("detected-counter-badge");
+      const toolbar = document.getElementById("batch-action-toolbar");
+      const saveBanner = document.getElementById("detection-save-confirmation");
+
+      if (emptyPrompt) emptyPrompt.classList.remove("hidden");
+      if (previewStage) {
+        previewStage.classList.add("hidden");
+        previewStage.classList.remove("flex");
+      }
+      if (mainImg) mainImg.removeAttribute("src");
+      if (fileInput) fileInput.value = "";
+      if (cards) cards.innerHTML = "";
+      if (badge) badge.classList.add("hidden");
+      if (toolbar) {
+        toolbar.classList.add("hidden");
+        toolbar.classList.remove("flex");
+      }
+      if (saveBanner) {
+        saveBanner.classList.add("hidden");
+        saveBanner.classList.remove("flex");
+      }
+      setDetectionLayout(false);
+    }
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        toggleDetectionPanel(false);
+        closeOutfitModal();
+      }
+    });
+
+    // =========================================================================
+    // PROFILE, WEATHER & ASTROLOGY API INTEGRATION
+    // =========================================================================
+    async function loadUserProfile() {
+      try {
+        const res = await fetch("/api/profile");
+        const data = await res.json();
+        if (data.profile) {
+          const name = data.profile.name || "Tanishk";
+          const dob = data.profile.dob || "2003-05-15";
+          const city = data.profile.city || "Mumbai";
+
+          document.getElementById("prof-name").value = name;
+          document.getElementById("prof-dob").value = dob;
+          document.getElementById("prof-city").value = city;
+          updateProfileIdentityUI(name, city);
+        }
+        if (data.astrology) {
+          cachedAstrology = data.astrology;
+          renderAstrologyUI(data.astrology);
+        }
+        await fetchLiveWeather();
+      } catch (err) {
+        console.error("Error loading profile:", err);
+      }
+    }
+
+    function updateProfileIdentityUI(name, city) {
+      const heroNameEl = document.getElementById("hero-profile-name");
+      const titleEl = document.getElementById("prof-card-title");
+      const locEl = document.getElementById("prof-card-location");
+      if (heroNameEl) heroNameEl.textContent = name || "Tanishk";
+      if (titleEl) titleEl.textContent = name;
+      if (locEl) locEl.textContent = `Residence · ${city}`;
+    }
+
+    function renderAstrologyUI(astro) {
+      if (!astro) return;
+      const profPlanetTitle = document.getElementById("prof-planet-title");
+      const profPlanetSub = document.getElementById("prof-planet-sub");
+      if (profPlanetTitle) {
+        profPlanetTitle.textContent = `Birth #${astro.birth_number} (${astro.birth_planet})`;
+      }
+      if (profPlanetSub) {
+        profPlanetSub.textContent = `${astro.weekday} · ${astro.weekday_planet}`;
+      }
+
+      const pillarDetails = document.getElementById("astro-pillar-details");
+      const pillarSwatches = document.getElementById("astro-pillar-swatches");
+      if (pillarDetails) {
+        pillarDetails.textContent = `Based on your selected birth star (#${astro.birth_number} ${astro.birth_planet})`;
+      }
+      if (pillarSwatches) {
+        pillarSwatches.innerHTML = (astro.display_swatches || []).slice(0, 4).map(sw => `
+          <span class="w-3.5 h-3.5 rounded-full border border-neutral-300 shadow-sm inline-block" title="${sw.name}" style="background-color: ${sw.hex};"></span>
+        `).join("");
+      }
+
+      const profSwatches = document.getElementById("prof-swatches");
+      if (profSwatches) {
+        profSwatches.innerHTML = (astro.display_swatches || []).map((sw, i) => `
+          <div class="flex items-center gap-2.5 p-2.5 rounded-xl bg-[#F5F5F5] border border-neutral-200">
+            <span class="w-6 h-6 rounded-full border border-neutral-300 shrink-0" style="background-color: ${sw.hex};"></span>
+            <div class="overflow-hidden">
+              <p class="text-xs font-bold text-black truncate">${sw.name}</p>
+              <p class="text-[10px] text-neutral-500">${i < 2 ? "Primary Lucky" : "Harmony Shade"}</p>
+            </div>
+          </div>
+        `).join("");
+      }
+    }
+
+    async function saveProfileData() {
+      const name = document.getElementById("prof-name")?.value.trim() || "Tanishk";
+      const dob = document.getElementById("prof-dob")?.value || "2003-05-15";
+      const city = document.getElementById("prof-city")?.value.trim() || "Mumbai";
+
+      updateProfileIdentityUI(name, city);
+
+      try {
+        const res = await fetch("/api/profile", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, dob, city })
+        });
+        const data = await res.json();
+        if (data.astrology) {
+          cachedAstrology = data.astrology;
+          renderAstrologyUI(data.astrology);
+        }
+        await fetchLiveWeather();
+        showToast("Profile saved", "success");
+      } catch (err) {
+        showToast("Could not save profile", "error");
+      }
+    }
+
+    function resetProfileForm() {
+      document.getElementById("prof-name").value = "Tanishk";
+      document.getElementById("prof-dob").value = "2003-05-15";
+      document.getElementById("prof-city").value = "Mumbai";
+      saveProfileData();
+    }
+
+    async function fetchLiveWeather() {
+      const city = document.getElementById("prof-city")?.value.trim() || "Mumbai";
+      const tempOverride = document.getElementById("input-temp-override")?.value ?? "";
+      const statusEl = document.getElementById("live-weather-status");
+
+      try {
+        let url = `/api/weather?city=${encodeURIComponent(city)}`;
+        if (tempOverride !== "") {
+          url += `&temp=${encodeURIComponent(tempOverride)}`;
+        }
+        const res = await fetch(url);
+        const data = await res.json();
+        if (data.weather) {
+          cachedWeather = data.weather;
+          const w = data.weather;
+          if (statusEl) {
+            statusEl.textContent = `Thermal Layering logic (${w.city} · ${w.temperature_c}°C)`;
+          }
+        }
+      } catch (err) {
+        if (statusEl) statusEl.textContent = "Thermal Layering logic";
+      }
+    }
+
+    // =========================================================================
+    // 4 PILLAR CARDS INTERACTION & RECOMMENDATION ENGINE (POST /api/recommend)
+    // =========================================================================
+    // Preload colorful 3D pillar icons for instant zero-latency toggle on click
+    ["/static/ui_assets/weather_color.png", "/static/ui_assets/occasion_color.png", "/static/ui_assets/astro_color.png"].forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
+
+    function syncPillarCardVisuals() {
+      const wChecked = Boolean(document.getElementById("check-pillar-weather")?.checked);
+      const oChecked = Boolean(document.getElementById("check-pillar-occasion")?.checked);
+      const aChecked = Boolean(document.getElementById("check-pillar-astro")?.checked);
+
+      document.getElementById("box-pillar-weather")?.classList.toggle("pillar-active", wChecked);
+      document.getElementById("box-pillar-occasion")?.classList.toggle("pillar-active", oChecked);
+      document.getElementById("box-pillar-astro")?.classList.toggle("pillar-active", aChecked);
+
+      // Swap between black-and-white (unclicked) and colorful (clicked) 3D icons
+      const wIcon = document.getElementById("icon-pillar-weather");
+      if (wIcon) {
+        wIcon.src = wChecked ? "/static/ui_assets/weather_color.png" : "/static/ui_assets/image6_83_3.png";
+      }
+      const oIcon = document.getElementById("icon-pillar-occasion");
+      if (oIcon) {
+        oIcon.src = oChecked ? "/static/ui_assets/occasion_color.png" : "/static/ui_assets/image7_83_3.png";
+      }
+      const aIcon = document.getElementById("icon-pillar-astro");
+      if (aIcon) {
+        aIcon.src = aChecked ? "/static/ui_assets/astro_color.png" : "/static/ui_assets/image8_83_3.png";
+      }
+
+      const count = 1 + (wChecked ? 1 : 0) + (oChecked ? 1 : 0) + (aChecked ? 1 : 0);
+      const badge = document.getElementById("active-pillars-count-badge");
+      if (badge) {
+        badge.textContent = `${count} ${count === 1 ? "Pillar" : "Pillars"} Active`;
+      }
+    }
+
+    function togglePillarCard(which) {
+      const checkEl = document.getElementById(`check-pillar-${which}`);
+      if (!checkEl) return;
+      checkEl.checked = !checkEl.checked;
+      syncPillarCardVisuals();
+      if (which === "weather" && checkEl.checked) {
+        fetchLiveWeather();
+      }
+    }
+
+    function onOccasionDropdownChange() {
+      const occCheck = document.getElementById("check-pillar-occasion");
+      if (occCheck && !occCheck.checked) {
+        occCheck.checked = true;
+      }
+      syncPillarCardVisuals();
+    }
+
+    async function setTempPreset(tempVal, btnEl) {
+      document.querySelectorAll(".temp-pill").forEach(p => {
+        p.className = "temp-pill px-2 py-0.5 rounded bg-neutral-100 hover:bg-neutral-200 text-[10.5px] font-semibold text-neutral-700 transition";
+      });
+      if (btnEl) {
+        btnEl.className = "temp-pill px-2 py-0.5 rounded bg-black text-white text-[10.5px] font-semibold transition";
+      }
+
+      const overrideInput = document.getElementById("input-temp-override");
+      if (overrideInput) {
+        overrideInput.value = tempVal !== null && tempVal !== undefined ? String(tempVal) : "";
+      }
+
+      const weatherCheck = document.getElementById("check-pillar-weather");
+      if (weatherCheck && !weatherCheck.checked) {
+        weatherCheck.checked = true;
+      }
+      syncPillarCardVisuals();
+      await fetchLiveWeather();
+    }
+
+    async function generateRecommendations(scrollToResults = false) {
+      const resultsContainer = document.getElementById("recommendation-results-container");
+      if (!resultsContainer) return;
+
+      const useWeather = Boolean(document.getElementById("check-pillar-weather")?.checked);
+      const useOccasion = Boolean(document.getElementById("check-pillar-occasion")?.checked);
+      const useAstro = Boolean(document.getElementById("check-pillar-astro")?.checked);
+      const occasion = document.getElementById("select-occasion")?.value || "casual_outing";
+      const city = document.getElementById("prof-city")?.value.trim() || "Mumbai";
+      const dob = document.getElementById("prof-dob")?.value || "2003-05-15";
+      const tempVal = document.getElementById("input-temp-override")?.value ?? "";
+
+      syncPillarCardVisuals();
+
+      try {
+        const payload = {
+          use_weather: useWeather,
+          use_occasion: useOccasion,
+          use_astrology: useAstro,
+          use_color_fit_harmony: true,
+          occasion: occasion,
+          city: city,
+          dob: dob,
+          override_temp_c: tempVal !== "" ? parseFloat(tempVal) : null,
+          top_k: 4
+        };
+
+        const res = await fetch("/api/recommend", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+
+        if (data.weather) {
+          cachedWeather = data.weather;
+          const w = data.weather;
+          const statusEl = document.getElementById("live-weather-status");
+          if (statusEl) {
+            statusEl.textContent = `Thermal Layering logic (${w.city} · ${w.temperature_c}°C)`;
+          }
+        }
+        if (data.astrology) {
+          cachedAstrology = data.astrology;
+          renderAstrologyUI(data.astrology);
+        }
+
+        const recs = data.recommendations || [];
+        currentRecommendations = recs;
+
+        if (recs.length === 0) {
+          resultsContainer.innerHTML = `
+            <div class="col-span-full p-12 rounded-[36px] bg-[#F5F5F5] text-center space-y-3">
+              <p class="text-lg font-bold text-black">${data.message || "Your wardrobe is empty."}</p>
+              <button onclick="seedPredefinedWardrobe()" type="button" class="px-6 py-2.5 rounded-full bg-black text-white text-sm font-semibold">
+                Load Starter Wardrobe
+              </button>
+            </div>
+          `;
+          return;
+        }
+
+        // Exact pastel backgrounds from Frame 2.svg (#1 Sky Blue #D9F0FF, #2 Peach #FFE4D9, #3 Mint, #4 Lavender)
+        const cardBgPalette = [
+          "rgba(217, 240, 255, 0.56)",
+          "rgba(255, 228, 217, 0.56)",
+          "rgba(222, 247, 229, 0.56)",
+          "rgba(237, 233, 254, 0.56)"
+        ];
+
+        resultsContainer.innerHTML = recs.map((rec, idx) => {
+          const items = rec.items || [];
+          const topItem = items.find(i => i.category === "top") || items[0];
+          const bottomItem = items.find(i => i.category === "bottom") || items[1];
+          const outerItem = items.find(i => i.category === "overtop");
+          const shoeItem = items.find(i => i.category === "footwear") || items[items.length - 1];
+
+          const isLiked = likedOutfits.has(idx);
+          const bgStyle = cardBgPalette[idx % cardBgPalette.length];
+
+          return `
+            <div class="outfit-pastel-card relative rounded-[38px] p-7 sm:p-9 min-h-[345px] flex flex-col justify-between overflow-hidden transition-shadow hover:shadow-lg" style="background-color: ${bgStyle};">
+              <!-- Top Row: Giant Outfit Number (Left) & Heart Icon (Right) -->
+              <div class="flex items-start justify-between z-10">
+                <span class="text-[52px] sm:text-[60px] font-bold text-black leading-none select-none">${idx + 1}</span>
+                <button onclick="toggleLikeOutfit(${idx}, this)" type="button" class="p-2 rounded-full hover:bg-black/5 transition text-black" title="Save to Favorites">
+                  <svg class="w-8 h-8" viewBox="0 0 24 24" fill="${isLiked ? '#111111' : 'none'}" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Center Row: Floating Garment Cutouts Collage (Top Left, Bottom Center, Outerwear/Shoes Right) -->
+              <div class="relative my-2 grid grid-cols-12 items-center gap-2 min-h-[215px] z-10">
+                <!-- Left Slot: Top (Tilted -6deg like Frame 2.svg) -->
+                <div class="col-span-5 flex flex-col items-center justify-center">
+                  ${topItem ? `
+                    <img
+                      src="${getCutoutUrl(topItem)}"
+                      alt="${topItem.name}"
+                      title="${topItem.name}"
+                      onclick="openOutfitModal(${idx})"
+                      class="garment-cutout-shadow max-h-[175px] sm:max-h-[195px] w-auto object-contain -rotate-6 cursor-pointer"
+                    />
+                  ` : ""}
+                </div>
+
+                <!-- Center Slot: Bottom / Trousers / Jeans (Upright Tall Center like Frame 2.svg) -->
+                <div class="col-span-4 flex flex-col items-center justify-center">
+                  ${bottomItem ? `
+                    <img
+                      src="${getCutoutUrl(bottomItem)}"
+                      alt="${bottomItem.name}"
+                      title="${bottomItem.name}"
+                      onclick="openOutfitModal(${idx})"
+                      class="garment-cutout-shadow max-h-[210px] sm:max-h-[235px] w-auto object-contain cursor-pointer"
+                    />
+                  ` : ""}
+                </div>
+
+                <!-- Right Slot: Outerwear (if present) + Footwear (Tilted like Frame 2.svg) -->
+                <div class="col-span-3 flex flex-col items-center justify-center gap-3">
+                  ${outerItem ? `
+                    <img
+                      src="${getCutoutUrl(outerItem)}"
+                      alt="${outerItem.name}"
+                      title="${outerItem.name}"
+                      onclick="openOutfitModal(${idx})"
+                      class="garment-cutout-shadow max-h-[115px] sm:max-h-[130px] w-auto object-contain rotate-3 cursor-pointer"
+                    />
+                  ` : ""}
+                  ${shoeItem && shoeItem !== topItem && shoeItem !== bottomItem ? `
+                    <img
+                      src="${getCutoutUrl(shoeItem)}"
+                      alt="${shoeItem.name}"
+                      title="${shoeItem.name}"
+                      onclick="openOutfitModal(${idx})"
+                      class="garment-cutout-shadow max-h-[85px] sm:max-h-[100px] w-auto object-contain rotate-6 cursor-pointer"
+                    />
+                  ` : ""}
+                </div>
+              </div>
+
+              <!-- Bottom Row: Clean "View" Pill Button on Bottom-Right matching Frame 2.svg -->
+              <div class="flex items-end justify-end gap-4 z-10 pt-1">
+                <button onclick="openOutfitModal(${idx})" type="button" class="btn-view-pill px-6 py-2 text-[13.5px] font-bold text-black shrink-0 cursor-pointer">
+                  View
+                </button>
+              </div>
+            </div>
+          `;
+        }).join("");
+
+        if (scrollToResults) {
+          document.getElementById("top-outfits-section")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      } catch (err) {
+        resultsContainer.innerHTML = `
+          <div class="col-span-full p-8 rounded-3xl bg-red-50 text-center text-sm font-semibold text-red-800">
+            Could not generate outfits right now. Please try again.
+          </div>
+        `;
+      }
+    }
+
+    function toggleLikeOutfit(idx, btnEl) {
+      if (likedOutfits.has(idx)) {
+        likedOutfits.delete(idx);
+        showToast(`Removed Outfit #${idx + 1} from favorites`, "info");
+      } else {
+        likedOutfits.add(idx);
+        showToast(`Saved Outfit #${idx + 1} to favorites`, "success");
+      }
+      const svg = btnEl?.querySelector("svg");
+      if (svg) {
+        svg.setAttribute("fill", likedOutfits.has(idx) ? "#111111" : "none");
+      }
+    }
+
+    function openOutfitModal(idx) {
+      const rec = currentRecommendations[idx];
+      const modal = document.getElementById("outfit-detail-modal");
+      if (!rec || !modal) return;
+
+      document.getElementById("modal-outfit-score").textContent = `${rec.score}% Harmony Match`;
+      document.getElementById("modal-outfit-title").textContent = `Outfit #${idx + 1} Details`;
+
+      const itemsContainer = document.getElementById("modal-outfit-items");
+      itemsContainer.innerHTML = (rec.items || []).map(it => {
+        const rawUrl = it.ghost_transparent_url || it.ghost_mannequin_url || it.image_url || "";
+        const imgUrl = rawUrl ? `${rawUrl}?v=3` : "";
+        const cat = formatCategoryLabel(it.category, it.subcategory);
+        const shade = formatLabel(it.shade || it.primary_color || "");
+        const mat = formatLabel(it.material || "");
+        return `
+          <div class="p-3 rounded-2xl bg-[#F5F5F5] flex items-center gap-3.5">
+            <img src="${imgUrl}" alt="${it.name}" class="w-16 h-16 rounded-xl object-cover bg-white shrink-0 border border-neutral-200" />
+            <div class="min-w-0">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-neutral-500 block">${cat}</span>
+              <h5 class="text-sm font-bold text-black truncate" title="${it.name}">${it.name}</h5>
+              <p class="text-xs text-neutral-600 truncate">${[shade, mat].filter(Boolean).join(" · ")}</p>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      const p = rec.pillar_scores || {};
+      const pillarsContainer = document.getElementById("modal-outfit-pillars");
+      const badges = [
+        `<span class="px-3 py-1 rounded-full bg-[#8AF45D]/30 text-black text-xs font-semibold">Colour Harmony: ${p.pillar3_color_fit_harmony ?? 95}%</span>`
+      ];
+      if (p.pillar1_weather_season !== null && p.pillar1_weather_season !== undefined) {
+        badges.push(`<span class="px-3 py-1 rounded-full bg-[#D9F0FF] text-black text-xs font-semibold">Weather &amp; Season: ${p.pillar1_weather_season}%</span>`);
+      }
+      if (p.pillar2_event_occasion !== null && p.pillar2_event_occasion !== undefined) {
+        badges.push(`<span class="px-3 py-1 rounded-full bg-[#FFE4D9] text-black text-xs font-semibold">Occasion &amp; Tone: ${p.pillar2_event_occasion}%</span>`);
+      }
+      if (p.pillar4_astrology_lucky_color !== null && p.pillar4_astrology_lucky_color !== undefined) {
+        badges.push(`<span class="px-3 py-1 rounded-full bg-purple-100 text-black text-xs font-semibold">Astro Signature: ${p.pillar4_astrology_lucky_color}%</span>`);
+      }
+      pillarsContainer.innerHTML = badges.join("");
+
+      const reasonsContainer = document.getElementById("modal-outfit-reasons");
+      reasonsContainer.innerHTML = (rec.reasons || []).map(r => `<li>${r}</li>`).join("");
+
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    }
+
+    function closeOutfitModal() {
+      const modal = document.getElementById("outfit-detail-modal");
+      if (modal) {
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+      }
+    }
+
+    // =========================================================================
+    // GARMENT DETECTION SCREEN (UPLOAD, BOUNDING BOXES & WARDROBE INGESTION)
+    // =========================================================================
+    function processFile(file) {
+      if (!file) return;
+      lastUploadedFile = file;
+
+      setDetectionLayout(true);
+
+      const emptyPrompt = document.getElementById("upload-empty-prompt");
+      const previewStage = document.getElementById("preview-stage");
+      const mainImg = document.getElementById("main-outfit-img");
+
+      if (emptyPrompt) emptyPrompt.classList.add("hidden");
+      if (previewStage) {
+        previewStage.classList.remove("hidden");
+        previewStage.classList.add("flex");
+      }
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (mainImg) {
+          mainImg.onload = () => drawGarmentBoxes();
+          mainImg.src = e.target.result;
+        }
+      };
+      reader.readAsDataURL(file);
+
+      const formData = new FormData();
+      formData.append("file", file);
+      analyzeFile(formData);
+    }
+
+    async function loadSampleImage(filename) {
+      try {
+        const panel = document.getElementById("detection-panel-container");
+        if (panel && panel.classList.contains("hidden")) {
+          toggleDetectionPanel(true);
+        }
+        showDetectionLoadingState();
+        const response = await fetch(`/tests/images/${filename}`);
+        if (!response.ok) throw new Error("Could not load example image");
+        const blob = await response.blob();
+        const file = new File([blob], filename, { type: "image/jpeg" });
+        processFile(file);
+      } catch (err) {
+        renderDetectionErrorState("Could not load the example photo.");
+      }
+    }
+
+    function showDetectionLoadingState() {
+      const spinner = document.getElementById("detection-spinner");
+      const counterBadge = document.getElementById("detected-counter-badge");
+      const toolbar = document.getElementById("batch-action-toolbar");
+      const saveBanner = document.getElementById("detection-save-confirmation");
+      const cardsContainer = document.getElementById("detected-cards-container");
+
+      if (spinner) {
+        spinner.classList.remove("hidden");
+        spinner.classList.add("flex");
+      }
+      if (counterBadge) counterBadge.classList.add("hidden");
+      if (toolbar) {
+        toolbar.classList.add("hidden");
+        toolbar.classList.remove("flex");
+      }
+      if (saveBanner) {
+        saveBanner.classList.add("hidden");
+        saveBanner.classList.remove("flex");
+      }
+      if (cardsContainer) {
+        cardsContainer.innerHTML = `
+          <div class="p-10 rounded-2xl bg-[#FFFEFA] border border-[#E3DED2] text-center flex flex-col items-center justify-center space-y-3">
+            <div class="w-8 h-8 rounded-full border-2 border-[#34483A] border-t-transparent animate-spin"></div>
+            <p class="font-semibold text-[#292D28]">Looking for individual clothing items…</p>
+          </div>
+        `;
+      }
+    }
+
+    function renderDetectionEmptyState(customMessage) {
+      const counterBadge = document.getElementById("detected-counter-badge");
+      const toolbar = document.getElementById("batch-action-toolbar");
+      const cardsContainer = document.getElementById("detected-cards-container");
+
+      if (counterBadge) {
+        counterBadge.textContent = "0 items found";
+        counterBadge.classList.remove("hidden");
+      }
+      if (toolbar) {
+        toolbar.classList.add("hidden");
+        toolbar.classList.remove("flex");
+      }
+      if (cardsContainer) {
+        cardsContainer.innerHTML = `
+          <div class="p-10 rounded-2xl bg-[#FFFEFA] border border-[#E3DED2] text-center space-y-3">
+            <span class="material-symbols-outlined text-[32px] text-[#7D9276]">person_search</span>
+            <p class="font-semibold text-[#292D28]">
+              ${customMessage || "No clothing items found. Try a clearer photo with one person in view."}
+            </p>
+            <button onclick="document.getElementById('file-input').click()" type="button" class="px-5 py-2 rounded-full bg-[#34483A] text-white text-xs font-semibold">
+              Try Another Photo
+            </button>
+          </div>
+        `;
+      }
+    }
+
+    function renderDetectionErrorState(errorMsg) {
+      const spinner = document.getElementById("detection-spinner");
+      const cardsContainer = document.getElementById("detected-cards-container");
+      if (spinner) {
+        spinner.classList.add("hidden");
+        spinner.classList.remove("flex");
+      }
+      if (cardsContainer) {
+        cardsContainer.innerHTML = `
+          <div class="p-10 rounded-2xl bg-red-50 border border-red-200 text-center space-y-3">
+            <p class="font-semibold text-red-900">${errorMsg || "Something went wrong while analyzing your photo."}</p>
+            <button onclick="retryLastUpload()" type="button" class="px-5 py-2 rounded-full bg-[#34483A] text-white text-xs font-semibold">
+              Retry
+            </button>
+          </div>
+        `;
+      }
+    }
+
+    function retryLastUpload() {
+      if (lastUploadedFile) {
+        processFile(lastUploadedFile);
+      } else {
+        document.getElementById("file-input")?.click();
+      }
+    }
+
+    async function analyzeFile(formData) {
+      showDetectionLoadingState();
+      currentGarments = [];
+      drawGarmentBoxes();
+
+      try {
+        const res = await fetch("/analyze-outfit", {
+          method: "POST",
+          body: formData
+        });
+        const data = await res.json();
+
+        const spinner = document.getElementById("detection-spinner");
+        if (spinner) {
+          spinner.classList.add("hidden");
+          spinner.classList.remove("flex");
+        }
+
+        if (
+          data.can_detect === false ||
+          data.is_group_photo ||
+          data.has_no_person ||
+          !res.ok ||
+          !data.garments ||
+          data.garments.length === 0
+        ) {
+          renderDetectionEmptyState("No clothing items found. Try a clearer photo with one person in view.");
+          return;
+        }
+
+        currentGarments = data.garments.map(g => ({
+          ...g,
+          selected: true,
+          is_showing_ghost: true,
+          _saved_status: null
+        }));
+
+        const count = currentGarments.length;
+        const counterBadge = document.getElementById("detected-counter-badge");
+        if (counterBadge) {
+          counterBadge.textContent = `${count} ${count === 1 ? "item" : "items"} found`;
+          counterBadge.classList.remove("hidden");
+        }
+
+        const toolbar = document.getElementById("batch-action-toolbar");
+        if (toolbar) {
+          toolbar.classList.remove("hidden");
+          toolbar.classList.add("flex");
+        }
+
+        const selectAllBox = document.getElementById("select-all-checkbox");
+        if (selectAllBox) selectAllBox.checked = true;
+
+        drawGarmentBoxes();
+        renderDetectedCards();
+      } catch (err) {
+        renderDetectionErrorState("We couldn't analyze this photo right now.");
+      }
+    }
+
+    function drawGarmentBoxes() {
+      const canvas = document.getElementById("preview-canvas");
+      const img = document.getElementById("main-outfit-img");
+      if (!canvas || !img) return;
+
+      const rect = canvas.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return;
+
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.floor(rect.width * dpr);
+      canvas.height = Math.floor(rect.height * dpr);
+
+      const ctx = canvas.getContext("2d");
+      ctx.resetTransform();
+      ctx.scale(dpr, dpr);
+      ctx.clearRect(0, 0, rect.width, rect.height);
+
+      if (!currentGarments || currentGarments.length === 0) return;
+
+      const natW = img.naturalWidth || rect.width;
+      const natH = img.naturalHeight || rect.height;
+      const scale = Math.min(rect.width / natW, rect.height / natH);
+      const drawW = natW * scale;
+      const drawH = natH * scale;
+      const offsetX = (rect.width - drawW) / 2;
+      const offsetY = (rect.height - drawH) / 2;
+
+      currentGarments.forEach((g, idx) => {
+        let bx, by, bw, bh;
+        if (g.box_norm && g.box_norm.length === 4) {
+          const [ymin_n, xmin_n, ymax_n, xmax_n] = g.box_norm;
+          bx = offsetX + xmin_n * drawW;
+          by = offsetY + ymin_n * drawH;
+          bw = (xmax_n - xmin_n) * drawW;
+          bh = (ymax_n - ymin_n) * drawH;
+        } else if (g.bounding_box && g.bounding_box.length === 4) {
+          const [y1, x1, y2, x2] = g.bounding_box;
+          bx = offsetX + (x1 / natW) * drawW;
+          by = offsetY + (y1 / natH) * drawH;
+          bw = ((x2 - x1) / natW) * drawW;
+          bh = ((y2 - y1) / natH) * drawH;
+        } else {
+          return;
+        }
+
+        const isHovered = hoveredGarmentIndex === idx;
+        const isSelected = g.selected !== false;
+
+        ctx.fillStyle = isHovered ? "rgba(125, 146, 118, 0.25)" : "rgba(125, 146, 118, 0.12)";
+        ctx.fillRect(bx, by, bw, bh);
+
+        ctx.strokeStyle = isHovered ? "#34483A" : "#7D9276";
+        ctx.lineWidth = isHovered ? 2 : 1.5;
+        ctx.setLineDash(isSelected ? [] : [4, 4]);
+        ctx.strokeRect(bx, by, bw, bh);
+        ctx.setLineDash([]);
+
+        const labelText = g.name || formatCategoryLabel(g.category, g.subcategory);
+        ctx.font = "600 11px Inter, sans-serif";
+        const textWidth = ctx.measureText(labelText).width;
+        const pillHeight = 22;
+        const pillWidth = textWidth + 24;
+        const pillX = Math.min(Math.max(bx + 6, 6), rect.width - pillWidth - 6);
+        const pillY = Math.max(by + 6, 6);
+
+        ctx.fillStyle = "#34483A";
+        ctx.beginPath();
+        ctx.roundRect(pillX, pillY, pillWidth, pillHeight, 11);
+        ctx.fill();
+
+        const shadeHex = g.color?.hex || getColorHex(g.color?.shade || g.primary_color);
+        ctx.fillStyle = shadeHex;
+        ctx.beginPath();
+        ctx.arc(pillX + 10, pillY + 11, 3.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = "#FFFEFA";
+        ctx.textBaseline = "middle";
+        ctx.fillText(labelText, pillX + 18, pillY + 11.5);
+      });
+    }
+
+    function renderDetectedCards() {
+      const container = document.getElementById("detected-cards-container");
+      if (!container || !currentGarments || currentGarments.length === 0) return;
+
+      container.innerHTML = "";
+
+      currentGarments.forEach((g, idx) => {
+        const isSelected = g.selected !== false;
+        const cleanedUrl = g.ghost_transparent_url || g.ghost_mannequin_url || g.image_url;
+        const originalCropUrl = g.image_url || g.ghost_mannequin_url;
+        const activeImgUrl = g.is_showing_ghost ? cleanedUrl : originalCropUrl;
+        const toggleLabel = g.is_showing_ghost ? "View original crop" : "View cleaned item";
+
+        const categoryText = formatCategoryLabel(g.category, g.subcategory);
+        const colorText = formatLabel(g.color?.shade || g.primary_color || "");
+        const materialText = formatLabel(g.material || "");
+        const shadeHex = g.color?.hex || getColorHex(g.color?.shade || g.primary_color);
+        const primaryMetaParts = [categoryText, colorText, materialText].filter(Boolean);
+
+        const secondaryChips = [];
+        if (g.pattern) {
+          const p = formatLabel(g.pattern);
+          secondaryChips.push(p.toLowerCase().includes("pattern") ? p : `${p} pattern`);
+        }
+        if (g.fit_type && g.fit_type !== "n/a") {
+          const f = formatLabel(g.fit_type);
+          secondaryChips.push(f.toLowerCase().includes("fit") ? f : `${f} fit`);
+        }
+        if (g.formality) secondaryChips.push(formatLabel(g.formality));
+
+        let actionBtnHtml = "";
+        if (g._saved_status === "added") {
+          actionBtnHtml = `<button disabled class="px-3.5 py-1.5 rounded-lg bg-[#8AF45D]/35 text-black font-semibold text-xs">✓ Added to Wardrobe</button>`;
+        } else if (g._saved_status === "duplicate") {
+          actionBtnHtml = `<button disabled class="px-3.5 py-1.5 rounded-lg bg-neutral-200 text-neutral-600 font-semibold text-xs">Already in Wardrobe</button>`;
+        } else if (g._saved_status === "saving") {
+          actionBtnHtml = `<button disabled class="px-3.5 py-1.5 rounded-lg bg-neutral-100 text-black font-semibold text-xs">Saving…</button>`;
+        } else {
+          actionBtnHtml = `
+            <button onclick="addSingleToWardrobe(${idx})" type="button" class="px-3.5 py-1.5 rounded-lg bg-[#EEE9DE] hover:bg-[#34483A] hover:text-white text-[#292D28] font-semibold text-xs transition border border-[#E3DED2]">
+              Add to Wardrobe
+            </button>
+          `;
+        }
+
+        const card = document.createElement("div");
+        card.className = "p-4 rounded-2xl bg-[#FFFEFA] shadow-sm flex flex-col sm:flex-row items-start gap-4 border border-[#E3DED2]";
+        card.onmouseenter = () => { hoveredGarmentIndex = idx; drawGarmentBoxes(); };
+        card.onmouseleave = () => { hoveredGarmentIndex = null; drawGarmentBoxes(); };
+
+        card.innerHTML = `
+          <div class="flex items-start gap-3 w-full sm:w-auto">
+            <input type="checkbox" ${isSelected ? "checked" : ""} onchange="toggleGarmentSelection(${idx})" class="mt-2 w-4 h-4 rounded text-[#34483A] cursor-pointer" />
+            <div class="relative w-24 h-24 rounded-xl bg-[#F8F6F0] border border-[#E3DED2] overflow-hidden shrink-0">
+              <img src="${activeImgUrl}" alt="${g.name}" class="w-full h-full object-contain p-1" />
+              <span class="absolute bottom-1.5 right-1.5 w-3.5 h-3.5 rounded-full border border-white shadow-sm" style="background-color: ${shadeHex};"></span>
+            </div>
+          </div>
+
+          <div class="flex-1 flex flex-col justify-between w-full space-y-2">
+            <div>
+              <div class="flex flex-wrap items-start justify-between gap-2">
+                <h4 class="font-bold text-base text-[#292D28]">${g.name}</h4>
+                <button onclick="toggleCleanedImage(${idx})" type="button" class="text-[11px] font-semibold text-[#34483A] bg-[#EEE9DE] px-2.5 py-1 rounded-lg border border-[#E3DED2]">
+                  ${toggleLabel}
+                </button>
+              </div>
+              <p class="text-xs text-neutral-600 mt-0.5">${primaryMetaParts.join(" · ")}</p>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-1.5">
+              ${secondaryChips.map(c => `<span class="px-2.5 py-0.5 rounded-full bg-[#F8F6F0] text-neutral-700 text-[11px] border border-[#E3DED2]">${c}</span>`).join("")}
+            </div>
+
+            <div class="pt-1 flex justify-end">
+              ${actionBtnHtml}
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      updateBatchButtonState();
+    }
+
+    function toggleGarmentSelection(idx) {
+      if (!currentGarments[idx]) return;
+      currentGarments[idx].selected = !currentGarments[idx].selected;
+      const selectAllBox = document.getElementById("select-all-checkbox");
+      if (selectAllBox) selectAllBox.checked = currentGarments.every(g => g.selected);
+      updateBatchButtonState();
+      drawGarmentBoxes();
+    }
+
+    function updateBatchButtonState() {
+      const selectedCount = currentGarments.filter(g => g.selected).length;
+      const totalCount = currentGarments.length;
+      const batchBtn = document.getElementById("btn-batch-add");
+      const label = document.getElementById("batch-btn-label");
+      const selectedCountLabel = document.getElementById("selected-count-label");
+
+      if (selectedCountLabel) {
+        selectedCountLabel.textContent = selectedCount === totalCount
+          ? `All ${totalCount} items selected`
+          : `${selectedCount} of ${totalCount} selected`;
+      }
+      if (label) {
+        label.textContent = selectedCount > 0
+          ? `Add Selected to Wardrobe (${selectedCount})`
+          : "Add Selected to Wardrobe";
+      }
+      if (batchBtn) batchBtn.disabled = selectedCount === 0;
+    }
+
+    function toggleCleanedImage(idx) {
+      if (!currentGarments[idx]) return;
+      currentGarments[idx].is_showing_ghost = !currentGarments[idx].is_showing_ghost;
+      renderDetectedCards();
+    }
+
+    function getCleanGarmentPayload(g) {
+      const clone = { ...g };
+      delete clone.selected;
+      delete clone.is_showing_ghost;
+      delete clone._saved_status;
+      return clone;
+    }
+
+    function showSaveConfirmationMessage(msg) {
+      const banner = document.getElementById("detection-save-confirmation");
+      const textEl = document.getElementById("detection-save-confirmation-text");
+      if (banner && textEl) {
+        textEl.textContent = msg;
+        banner.classList.remove("hidden");
+        banner.classList.add("flex");
+      }
+    }
+
+    async function addSingleToWardrobe(idx) {
+      const g = currentGarments[idx];
+      if (!g || g._saved_status === "saving") return;
+
+      g._saved_status = "saving";
+      renderDetectedCards();
+
+      try {
+        const res = await fetch("/api/wardrobe/add", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(getCleanGarmentPayload(g))
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error("Failed to save item");
+
+        if (data.is_duplicate) {
+          g._saved_status = "duplicate";
+          showSaveConfirmationMessage(`${g.name} is already in your wardrobe.`);
+        } else {
+          g._saved_status = "added";
+          showSaveConfirmationMessage("1 item added to your wardrobe.");
+        }
+        renderDetectedCards();
+        await loadWardrobe();
+      } catch (err) {
+        g._saved_status = null;
+        renderDetectedCards();
+        showToast("Could not save item to wardrobe.", "error");
+      }
+    }
+
+    let isBatchSaving = false;
+    async function addBatchToWardrobe() {
+      if (isBatchSaving) return;
+      const selectedIndices = currentGarments
+        .map((g, i) => (g.selected ? i : -1))
+        .filter(i => i !== -1);
+      if (selectedIndices.length === 0) return;
+
+      isBatchSaving = true;
+      const btn = document.getElementById("btn-batch-add");
+      if (btn) btn.disabled = true;
+
+      try {
+        const payload = selectedIndices.map(i => getCleanGarmentPayload(currentGarments[i]));
+        const res = await fetch("/api/wardrobe/add-batch", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        const addedCount = data.added_count || 0;
+        const dupCount = data.duplicate_count || 0;
+
+        selectedIndices.forEach(i => {
+          currentGarments[i]._saved_status = addedCount > 0 ? "added" : "duplicate";
+        });
+
+        const confirmMsg = addedCount > 0
+          ? `${addedCount} ${addedCount === 1 ? "item" : "items"} added to your wardrobe.`
+          : `Selected ${dupCount === 1 ? "item is" : "items are"} already in your wardrobe.`;
+
+        showSaveConfirmationMessage(confirmMsg);
+        showToast(confirmMsg, addedCount > 0 ? "success" : "info");
+        renderDetectedCards();
+        await loadWardrobe();
+      } catch (err) {
+        showToast("Could not save selected items.", "error");
+      } finally {
+        isBatchSaving = false;
+        updateBatchButtonState();
+      }
+    }
+
+    // =========================================================================
+    // DIGITAL WARDROBE CRUD
+    // =========================================================================
+    async function loadWardrobe() {
+      try {
+        const res = await fetch("/api/wardrobe");
+        const data = await res.json();
+        wardrobeArchive = data.items || [];
+        updateWardrobeCounters();
+        renderWardrobeGrid();
+      } catch (err) {
+        console.error("Failed to load wardrobe:", err);
+      }
+    }
+
+    function updateWardrobeCounters() {
+      const total = wardrobeArchive.length;
+      const sidebarCount = document.getElementById("sidebar-wardrobe-count");
+      const countLabel = document.getElementById("wardrobe-count");
+      if (sidebarCount) sidebarCount.textContent = `${total} items`;
+      if (countLabel) countLabel.textContent = `${total} items`;
+
+      const counts = { all: total, top: 0, bottom: 0, overtop: 0, footwear: 0, accessory: 0 };
+      wardrobeArchive.forEach(it => {
+        const c = (it.category || "").toLowerCase();
+        if (counts[c] !== undefined) counts[c]++;
+      });
+
+      Object.keys(counts).forEach(cat => {
+        const el = document.getElementById(`count-cat-${cat}`);
+        if (el) el.textContent = String(counts[cat]);
+      });
+    }
+
+    function renderWardrobeGrid() {
+      const container = document.getElementById("wardrobe-grid-container");
+      const emptyState = document.getElementById("wardrobe-empty-state");
+      if (!container) return;
+
+      let filtered = wardrobeArchive.filter(it => {
+        const cat = (it.category || "").toLowerCase();
+        const matchesCat = activeWardrobeCategory === "all" || cat === activeWardrobeCategory;
+        if (!matchesCat) return false;
+        if (!searchQuery) return true;
+        const haystack = [
+          it.name,
+          it.category,
+          it.subcategory,
+          it.shade,
+          it.primary_color,
+          it.material
+        ].filter(Boolean).join(" ").toLowerCase();
+        return haystack.includes(searchQuery);
+      });
+
+      const formalityRank = { formal: 5, ethnic: 5, smart_casual: 4, casual: 3, sporty: 2 };
+      filtered.sort((a, b) => {
+        if (currentSort === "formality") return (formalityRank[b.formality] || 3) - (formalityRank[a.formality] || 3);
+        if (currentSort === "color") return String(a.shade || "").localeCompare(String(b.shade || ""));
+        if (currentSort === "name") return String(a.name || "").localeCompare(String(b.name || ""));
+        return (b.id || 0) - (a.id || 0);
+      });
+
+      container.innerHTML = "";
+
+      if (filtered.length === 0) {
+        if (emptyState) {
+          emptyState.classList.remove("hidden");
+          emptyState.classList.add("flex");
+        }
+        return;
+      }
+
+      if (emptyState) {
+        emptyState.classList.add("hidden");
+        emptyState.classList.remove("flex");
+      }
+
+      filtered.forEach(it => {
+        const rawUrl = it.ghost_transparent_url || it.ghost_mannequin_url || it.image_url || "";
+        const imgUrl = rawUrl ? `${rawUrl}?v=3` : "";
+        const colorName = formatLabel(it.shade || it.primary_color || "Neutral");
+        const catLabel = formatCategoryLabel(it.category, it.subcategory);
+        const matLabel = formatLabel(it.material || "Cotton");
+
+        const card = document.createElement("article");
+        card.className = "group bg-[#F5F5F5] rounded-2xl p-3 flex flex-col justify-between hover:shadow-md transition";
+        card.innerHTML = `
+          <div>
+            <div class="relative aspect-square rounded-xl overflow-hidden bg-white flex items-center justify-center p-2">
+              <img src="${imgUrl}" alt="${it.name}" class="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105" />
+              <button onclick="removeWardrobeItem(${it.id})" type="button" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 text-red-600 opacity-0 group-hover:opacity-100 transition flex items-center justify-center shadow-sm" title="Remove">
+                <span class="material-symbols-outlined text-[15px]">close</span>
+              </button>
+            </div>
+            <div class="mt-2.5 px-1">
+              <span class="text-[10.5px] font-bold uppercase tracking-wider text-neutral-500">${catLabel} · ${matLabel}</span>
+              <h3 class="text-sm font-bold text-black truncate mt-0.5" title="${it.name}">${it.name}</h3>
+              <span class="text-xs text-neutral-600">${colorName}</span>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filterWardrobe(category, buttonEl) {
+      activeWardrobeCategory = category;
+      document.querySelectorAll(".category-chip").forEach(chip => {
+        chip.className = "category-chip px-4 py-2 rounded-full text-sm font-semibold transition whitespace-nowrap bg-[#F5F5F5] text-neutral-700 hover:bg-neutral-200";
+      });
+      if (buttonEl) {
+        buttonEl.className = "category-chip px-4 py-2 rounded-full text-sm font-semibold transition whitespace-nowrap bg-black text-white";
+      }
+      renderWardrobeGrid();
+    }
+
+    function handleSearch(val) {
+      searchQuery = (val || "").toLowerCase().trim();
+      renderWardrobeGrid();
+    }
+
+    function sortGarments(crit) {
+      currentSort = crit || "recent";
+      renderWardrobeGrid();
+    }
+
+    function resetFilters() {
+      searchQuery = "";
+      const searchInput = document.getElementById("garment-search-input");
+      if (searchInput) searchInput.value = "";
+      const allBtn = document.querySelector('.category-chip[data-category="all"]');
+      filterWardrobe("all", allBtn);
+    }
+
+    async function removeWardrobeItem(id) {
+      try {
+        const res = await fetch(`/api/wardrobe/${id}`, { method: "DELETE" });
+        if (res.ok) {
+          showToast("Removed item from wardrobe", "info");
+          await loadWardrobe();
+        }
+      } catch (err) {
+        showToast("Could not remove item", "error");
+      }
+    }
+
+    async function seedPredefinedWardrobe() {
+      try {
+        await fetch("/api/wardrobe/seed", { method: "POST" });
+        await loadWardrobe();
+        showToast("Wardrobe seeded", "success");
+      } catch (err) {
+        showToast("Could not seed wardrobe", "error");
+      }
+    }
+
+    async function clearWardrobeConfirm() {
+      if (!confirm("Clear all items from your wardrobe?")) return;
+      try {
+        await fetch("/api/wardrobe", { method: "DELETE" });
+        await loadWardrobe();
+        showToast("Wardrobe cleared", "info");
+      } catch (err) {
+        showToast("Could not clear wardrobe", "error");
+      }
+    }
+
+    function showToast(message, type = "info") {
+      const portal = document.getElementById("toast-portal");
+      if (!portal) return;
+
+      const toast = document.createElement("div");
+      toast.className = `pointer-events-auto px-4 py-2.5 rounded-full shadow-lg flex items-center gap-2 text-xs font-bold transform transition-all duration-300 translate-y-2 opacity-0 ${type === "success" ? "bg-black text-white" : type === "error" ? "bg-red-600 text-white" : "bg-[#F5F5F5] text-black border border-neutral-300"
+        }`;
+      toast.innerHTML = `<span>${message}</span>`;
+
+      portal.appendChild(toast);
+      requestAnimationFrame(() => {
+        toast.classList.remove("translate-y-2", "opacity-0");
+      });
+      setTimeout(() => {
+        toast.classList.add("opacity-0", "translate-y-2");
+        setTimeout(() => toast.remove(), 300);
+      }, 2800);
+    }
+
+    // =========================================================================
+    // INITIALIZE HOMEPAGE ON LOAD (OUTFITS ONLY APPEAR WHEN GENERATE IS PRESSED)
+    // =========================================================================
+    window.addEventListener("DOMContentLoaded", async () => {
+      syncPillarCardVisuals();
+      await loadUserProfile();
+      await loadWardrobe();
+
+      const selectAllCheckbox = document.getElementById("select-all-checkbox");
+      if (selectAllCheckbox) {
+        selectAllCheckbox.addEventListener("change", (e) => {
+          const isChecked = e.target.checked;
+          currentGarments.forEach(g => { g.selected = isChecked; });
+          renderDetectedCards();
+          drawGarmentBoxes();
+        });
+      }
+
+      const dropzone = document.getElementById("dropzone");
+      const fileInput = document.getElementById("file-input");
+      const btnReplace = document.getElementById("btn-replace-photo");
+      const btnUpload = document.getElementById("btn-upload-new");
+
+      const triggerUpload = () => fileInput && fileInput.click();
+      if (btnReplace) btnReplace.addEventListener("click", triggerUpload);
+      if (btnUpload) btnUpload.addEventListener("click", triggerUpload);
+
+      if (dropzone) {
+        dropzone.addEventListener("dragover", (e) => { e.preventDefault(); });
+        dropzone.addEventListener("drop", (e) => {
+          e.preventDefault();
+          if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+            processFile(e.dataTransfer.files[0]);
+          }
+        });
+      }
+
+      if (fileInput) {
+        fileInput.addEventListener("change", (e) => {
+          if (e.target.files && e.target.files[0]) {
+            processFile(e.target.files[0]);
+          }
+        });
+      }
+
+      window.addEventListener("resize", drawGarmentBoxes);
+    });
+  </script>
+</body>
+
+</html>

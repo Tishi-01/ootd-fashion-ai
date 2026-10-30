@@ -1,0 +1,86 @@
+{
+  "person_count": 1,
+  "is_group_photo": false,
+  "has_no_person": false,
+  "rejection_reason": null,
+  "items": [
+    {
+      "box_2d": [
+        330.0,
+        101.0,
+        1000.0,
+        891.0
+      ],
+      "name": "Turquoise Silk Saree",
+      "label": "Turquoise Saree",
+      "category": "dress",
+      "subcategory": "saree",
+      "pattern": "graphic",
+      "fit": "regular",
+      "silhouette": "relaxed",
+      "length": "maxi",
+      "material": "silk",
+      "formality": "semi_formal",
+      "color_primary": "teal",
+      "color_secondary": "gold",
+      "layer": "base",
+      "style_tags": [
+        "ethnic"
+      ],
+      "occasions": [
+        "festival",
+        "wedding"
+      ],
+      "seasons": [
+        "spring",
+        "summer",
+        "fall",
+        "winter"
+      ],
+      "weather": [
+        "warm",
+        "cool"
+      ],
+      "confidence": 0.98
+    },
+    {
+      "box_2d": [
+        344.0,
+        96.0,
+        1000.0,
+        638.0
+      ],
+      "name": "Turquoise Patterned Blouse",
+      "label": "Turquoise Saree Blouse",
+      "category": "top",
+      "subcategory": "saree_blouse",
+      "pattern": "graphic",
+      "fit": "fitted",
+      "silhouette": "fitted",
+      "length": "crop",
+      "material": "silk",
+      "formality": "semi_formal",
+      "color_primary": "teal",
+      "color_secondary": "gold",
+      "layer": "inner",
+      "style_tags": [
+        "ethnic"
+      ],
+      "occasions": [
+        "festival",
+        "wedding"
+      ],
+      "seasons": [
+        "spring",
+        "summer",
+        "fall",
+        "winter"
+      ],
+      "weather": [
+        "warm",
+        "cool"
+      ],
+      "confidence": 0.95
+    }
+  ]
+}

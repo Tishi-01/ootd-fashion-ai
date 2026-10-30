@@ -1,0 +1,243 @@
+{
+  "person_count": 1,
+  "is_group_photo": false,
+  "has_no_person": false,
+  "rejection_reason": null,
+  "items": [
+    {
+      "box_2d": [
+        125.0,
+        238.0,
+        485.0,
+        617.0
+      ],
+      "name": "Red Graphic T-shirt",
+      "label": "Red graphic T-shirt",
+      "category": "top",
+      "subcategory": "tshirt",
+      "pattern": "graphic",
+      "fit": "regular",
+      "silhouette": "relaxed",
+      "length": "regular",
+      "material": "cotton",
+      "formality": "casual",
+      "color_primary": "red",
+      "color_secondary": "pure_white",
+      "layer": "base",
+      "style_tags": [
+        "casual",
+        "streetwear"
+      ],
+      "occasions": [
+        "casual_outing",
+        "college"
+      ],
+      "seasons": [
+        "summer",
+        "spring"
+      ],
+      "weather": [
+        "warm",
+        "hot"
+      ],
+      "confidence": 0.98
+    },
+    {
+      "box_2d": [
+        452.0,
+        264.0,
+        897.0,
+        553.0
+      ],
+      "name": "Dark Blue Slim Fit Jeans",
+      "label": "Dark blue slim fit jeans",
+      "category": "bottom",
+      "subcategory": "jeans",
+      "pattern": "plain",
+      "fit": "slim",
+      "silhouette": "straight",
+      "length": "ankle_length",
+      "material": "denim",
+      "formality": "casual",
+      "color_primary": "indigo_denim",
+      "color_secondary": null,
+      "layer": "base",
+      "style_tags": [
+        "casual",
+        "minimal",
+        "streetwear"
+      ],
+      "occasions": [
+        "casual_outing",
+        "college"
+      ],
+      "seasons": [
+        "spring",
+        "summer",
+        "fall",
+        "winter"
+      ],
+      "weather": [
+        "warm",
+        "cool"
+      ],
+      "confidence": 0.99
+    },
+    {
+      "box_2d": [
+        886.0,
+        181.0,
+        968.0,
+        375.0
+      ],
+      "name": "Beige High-Top Sneakers",
+      "label": "Beige high-top sneakers",
+      "category": "footwear",
+      "subcategory": "sneakers",
+      "pattern": "plain",
+      "fit": "regular",
+      "silhouette": "relaxed",
+      "length": "regular",
+      "material": "cotton",
+      "formality": "casual",
+      "color_primary": "beige",
+      "color_secondary": null,
+      "layer": "base",
+      "style_tags": [
+        "casual",
+        "streetwear"
+      ],
+      "occasions": [
+        "casual_outing",
+        "college"
+      ],
+      "seasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "weather": [
+        "warm",
+        "cool"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "box_2d": [
+        877.0,
+        479.0,
+        991.0,
+        581.0
+      ],
+      "name": "Beige High-Top Sneakers",
+      "label": "Beige high-top sneakers",
+      "category": "footwear",
+      "subcategory": "sneakers",
+      "pattern": "plain",
+      "fit": "regular",
+      "silhouette": "relaxed",
+      "length": "regular",
+      "material": "cotton",
+      "formality": "casual",
+      "color_primary": "beige",
+      "color_secondary": null,
+      "layer": "base",
+      "style_tags": [
+        "casual",
+        "streetwear"
+      ],
+      "occasions": [
+        "casual_outing",
+        "college"
+      ],
+      "seasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "weather": [
+        "warm",
+        "cool"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "box_2d": [
+        57.0,
+        268.0,
+        98.0,
+        399.0
+      ],
+      "name": "Tinted Sunglasses",
+      "label": "Tinted sunglasses",
+      "category": "accessory",
+      "subcategory": "sunglasses",
+      "pattern": "plain",
+      "fit": "regular",
+      "silhouette": "relaxed",
+      "length": "regular",
+      "material": "polyester",
+      "formality": "casual",
+      "color_primary": "brown",
+      "color_secondary": null,
+      "layer": "outer",
+      "style_tags": [
+        "casual",
+        "chic"
+      ],
+      "occasions": [
+        "casual_outing",
+        "vacation"
+      ],
+      "seasons": [
+        "summer",
+        "spring"
+      ],
+      "weather": [
+        "hot",
+        "warm"
+      ],
+      "confidence": 0.96
+    },
+    {
+      "box_2d": [
+        394.0,
+        500.0,
+        433.0,
+        550.0
+      ],
+      "name": "Analog Watch with Brown Strap",
+      "label": "Analog watch with brown strap",
+      "category": "accessory",
+      "subcategory": "watch",
+      "pattern": "plain",
+      "fit": "regular",
+      "silhouette": "relaxed",
+      "length": "regular",
+      "material": "leather",
+      "formality": "casual",
+      "color_primary": "brown",
+      "color_secondary": "pure_white",
+      "layer": "outer",
+      "style_tags": [
+        "casual",
+        "minimal"
+      ],
+      "occasions": [
+        "casual_outing",
+        "college"
+      ],
+      "seasons": [
+        "spring",
+        "summer",
+        "fall",
+        "winter"
+      ],
+      "weather": [
+        "warm",
+        "cool"
+      ],
+      "confidence": 0.92
+    }
+  ]
+}

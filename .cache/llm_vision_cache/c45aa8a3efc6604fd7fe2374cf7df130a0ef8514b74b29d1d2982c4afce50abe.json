@@ -1,0 +1,65 @@
+{
+  "items": [
+    {
+      "box_2d": [
+        0.3,
+        0.25,
+        0.92,
+        0.78
+      ],
+      "label": "white zip-up bomber jacket",
+      "category": "overtop",
+      "subcategory": "bomber_jacket",
+      "pattern": "plain",
+      "fit": "regular",
+      "length": "regular",
+      "material": "polyester",
+      "color_primary": "white",
+      "color_secondary": null,
+      "layer": "outer",
+      "confidence": 0.98
+    },
+    {
+      "box_2d": [
+        0.38,
+        0.42,
+        0.78,
+        0.6
+      ],
+      "label": "white inner t-shirt",
+      "category": "top",
+      "subcategory": "tshirt",
+      "pattern": "plain",
+      "fit": "regular",
+      "length": "regular",
+      "material": "cotton",
+      "color_primary": "white",
+      "color_secondary": null,
+      "layer": "inner",
+      "confidence": 0.95
+    },
+    {
+      "box_2d": [
+        0.84,
+        0.36,
+        1.0,
+        0.68
+      ],
+      "label": "dark navy joggers",
+      "category": "bottom",
+      "subcategory": "joggers",
+      "pattern": "plain",
+      "fit": "relaxed",
+      "length": "ankle_length",
+      "material": "cotton",
+      "color_primary": "dark_navy",
+      "color_secondary": null,
+      "layer": "base",
+      "confidence": 0.96
+    }
+  ],
+  "is_group_photo": false,
+  "has_no_person": false,
+  "person_count": 1,
+  "rejection_reason": null
+}

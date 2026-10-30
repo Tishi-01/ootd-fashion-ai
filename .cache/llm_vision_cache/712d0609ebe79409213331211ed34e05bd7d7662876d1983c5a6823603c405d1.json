@@ -1,0 +1,65 @@
+{
+  "items": [
+    {
+      "box_2d": [
+        0.16,
+        0.42,
+        0.5,
+        0.76
+      ],
+      "label": "olive green graphic t-shirt",
+      "category": "top",
+      "subcategory": "tshirt",
+      "pattern": "graphic",
+      "fit": "regular",
+      "length": "regular",
+      "material": "cotton",
+      "color_primary": "olive_green",
+      "color_secondary": "white",
+      "layer": "base",
+      "confidence": 0.98
+    },
+    {
+      "box_2d": [
+        0.46,
+        0.19,
+        0.92,
+        0.63
+      ],
+      "label": "blue washed slim jeans",
+      "category": "bottom",
+      "subcategory": "jeans",
+      "pattern": "plain",
+      "fit": "slim",
+      "length": "ankle_length",
+      "material": "denim",
+      "color_primary": "blue",
+      "color_secondary": null,
+      "layer": "base",
+      "confidence": 0.97
+    },
+    {
+      "box_2d": [
+        0.68,
+        0.14,
+        0.99,
+        0.57
+      ],
+      "label": "olive and grey sneakers",
+      "category": "footwear",
+      "subcategory": "sneakers",
+      "pattern": "colorblock",
+      "fit": "regular",
+      "length": "regular",
+      "material": "leather",
+      "color_primary": "olive_green",
+      "color_secondary": "white",
+      "layer": "base",
+      "confidence": 0.96
+    }
+  ],
+  "is_group_photo": false,
+  "has_no_person": false,
+  "person_count": 1,
+  "rejection_reason": null
+}

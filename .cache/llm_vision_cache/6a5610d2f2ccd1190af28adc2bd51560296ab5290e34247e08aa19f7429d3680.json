@@ -1,0 +1,245 @@
+{
+  "person_count": 1,
+  "is_group_photo": false,
+  "has_no_person": false,
+  "rejection_reason": null,
+  "items": [
+    {
+      "box_2d": [
+        238.0,
+        377.0,
+        480.0,
+        663.0
+      ],
+      "name": "Lilac Graphic T-Shirt",
+      "label": "Lilac Graphic T-Shirt",
+      "category": "top",
+      "subcategory": "tshirt",
+      "pattern": "graphic",
+      "fit": "regular",
+      "silhouette": "straight",
+      "length": "regular",
+      "material": "cotton",
+      "formality": "casual",
+      "color_primary": "pink",
+      "color_secondary": "purple",
+      "layer": "base",
+      "style_tags": [
+        "casual",
+        "streetwear"
+      ],
+      "occasions": [
+        "casual_outing",
+        "college"
+      ],
+      "seasons": [
+        "summer",
+        "spring"
+      ],
+      "weather": [
+        "warm",
+        "hot"
+      ],
+      "confidence": 0.98
+    },
+    {
+      "box_2d": [
+        472.0,
+        434.0,
+        863.0,
+        732.0
+      ],
+      "name": "Blue Loose Jeans",
+      "label": "Blue Loose Jeans",
+      "category": "bottom",
+      "subcategory": "jeans",
+      "pattern": "plain",
+      "fit": "loose",
+      "silhouette": "relaxed",
+      "length": "ankle_length",
+      "material": "denim",
+      "formality": "casual",
+      "color_primary": "blue",
+      "color_secondary": null,
+      "layer": "base",
+      "style_tags": [
+        "casual",
+        "streetwear"
+      ],
+      "occasions": [
+        "casual_outing",
+        "college"
+      ],
+      "seasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "weather": [
+        "warm",
+        "cool"
+      ],
+      "confidence": 0.97
+    },
+    {
+      "box_2d": [
+        766.0,
+        626.0,
+        897.0,
+        718.0
+      ],
+      "name": "Grey and White High Top Sneakers",
+      "label": "Grey and White High Top Sneakers",
+      "category": "footwear",
+      "subcategory": "sneakers",
+      "pattern": "colorblock",
+      "fit": "regular",
+      "silhouette": "straight",
+      "length": "regular",
+      "material": "leather",
+      "formality": "casual",
+      "color_primary": "pure_white",
+      "color_secondary": "grey",
+      "layer": "base",
+      "style_tags": [
+        "streetwear",
+        "casual",
+        "sporty"
+      ],
+      "occasions": [
+        "casual_outing",
+        "college"
+      ],
+      "seasons": [
+        "spring",
+        "summer",
+        "fall",
+        "winter"
+      ],
+      "weather": [
+        "warm",
+        "cool"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "box_2d": [
+        853.0,
+        462.0,
+        945.0,
+        561.0
+      ],
+      "name": "Grey and White High Top Sneakers",
+      "label": "Grey and White High Top Sneakers",
+      "category": "footwear",
+      "subcategory": "sneakers",
+      "pattern": "colorblock",
+      "fit": "regular",
+      "silhouette": "straight",
+      "length": "regular",
+      "material": "leather",
+      "formality": "casual",
+      "color_primary": "pure_white",
+      "color_secondary": "grey",
+      "layer": "base",
+      "style_tags": [
+        "streetwear",
+        "casual",
+        "sporty"
+      ],
+      "occasions": [
+        "casual_outing",
+        "college"
+      ],
+      "seasons": [
+        "spring",
+        "summer",
+        "fall",
+        "winter"
+      ],
+      "weather": [
+        "warm",
+        "cool"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "box_2d": [
+        167.0,
+        473.0,
+        197.0,
+        550.0
+      ],
+      "name": "Round Sunglasses",
+      "label": "Round Sunglasses",
+      "category": "accessory",
+      "subcategory": "sunglasses",
+      "pattern": "plain",
+      "fit": "regular",
+      "silhouette": "straight",
+      "length": "regular",
+      "material": "leather",
+      "formality": "casual",
+      "color_primary": "black",
+      "color_secondary": null,
+      "layer": "base",
+      "style_tags": [
+        "casual",
+        "chic"
+      ],
+      "occasions": [
+        "casual_outing",
+        "vacation"
+      ],
+      "seasons": [
+        "summer",
+        "spring"
+      ],
+      "weather": [
+        "hot",
+        "warm"
+      ],
+      "confidence": 0.92
+    },
+    {
+      "box_2d": [
+        462.0,
+        565.0,
+        489.0,
+        606.0
+      ],
+      "name": "Silver Watch",
+      "label": "Silver Watch",
+      "category": "accessory",
+      "subcategory": "watch",
+      "pattern": "plain",
+      "fit": "regular",
+      "silhouette": "straight",
+      "length": "regular",
+      "material": "leather",
+      "formality": "casual",
+      "color_primary": "grey",
+      "color_secondary": null,
+      "layer": "base",
+      "style_tags": [
+        "casual",
+        "minimal"
+      ],
+      "occasions": [
+        "casual_outing",
+        "college"
+      ],
+      "seasons": [
+        "spring",
+        "summer",
+        "fall",
+        "winter"
+      ],
+      "weather": [
+        "warm",
+        "cool"
+      ],
+      "confidence": 0.9
+    }
+  ]
+}

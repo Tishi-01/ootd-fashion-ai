@@ -1,0 +1,207 @@
+{
+  "person_count": 1,
+  "is_group_photo": false,
+  "has_no_person": false,
+  "rejection_reason": null,
+  "items": [
+    {
+      "box_2d": [
+        160.0,
+        383.0,
+        472.0,
+        654.0
+      ],
+      "name": "Tie-Dye Graphic T-Shirt",
+      "label": "T-Shirt",
+      "category": "top",
+      "subcategory": "tshirt",
+      "pattern": "graphic",
+      "fit": "regular",
+      "silhouette": "relaxed",
+      "length": "regular",
+      "material": "cotton",
+      "formality": "casual",
+      "color_primary": "pink",
+      "color_secondary": "purple",
+      "layer": "inner",
+      "style_tags": [
+        "casual",
+        "streetwear"
+      ],
+      "occasions": [
+        "college",
+        "casual_outing"
+      ],
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "weather": [
+        "hot",
+        "warm"
+      ],
+      "confidence": 0.98
+    },
+    {
+      "box_2d": [
+        463.0,
+        431.0,
+        852.0,
+        734.0
+      ],
+      "name": "Blue Denim Jeans",
+      "label": "Jeans",
+      "category": "bottom",
+      "subcategory": "jeans",
+      "pattern": "plain",
+      "fit": "regular",
+      "silhouette": "straight",
+      "length": "ankle_length",
+      "material": "denim",
+      "formality": "casual",
+      "color_primary": "indigo_denim",
+      "color_secondary": "blue",
+      "layer": "base",
+      "style_tags": [
+        "casual",
+        "streetwear"
+      ],
+      "occasions": [
+        "college",
+        "casual_outing"
+      ],
+      "seasons": [
+        "spring",
+        "fall",
+        "winter",
+        "summer"
+      ],
+      "weather": [
+        "warm",
+        "cool"
+      ],
+      "confidence": 0.97
+    },
+    {
+      "box_2d": [
+        766.0,
+        463.0,
+        942.0,
+        558.0
+      ],
+      "name": "High-Top Sneakers",
+      "label": "Sneakers",
+      "category": "footwear",
+      "subcategory": "sneakers",
+      "pattern": "plain",
+      "fit": "regular",
+      "silhouette": "regular",
+      "length": "regular",
+      "material": "leather",
+      "formality": "casual",
+      "color_primary": "pure_white",
+      "color_secondary": "black",
+      "layer": "base",
+      "style_tags": [
+        "streetwear",
+        "sporty",
+        "casual"
+      ],
+      "occasions": [
+        "college",
+        "casual_outing",
+        "gym_sports"
+      ],
+      "seasons": [
+        "spring",
+        "summer",
+        "fall",
+        "winter"
+      ],
+      "weather": [
+        "warm",
+        "cool"
+      ],
+      "confidence": 0.96
+    },
+    {
+      "box_2d": [
+        166.0,
+        472.0,
+        197.0,
+        548.0
+      ],
+      "name": "Metal Frame Sunglasses",
+      "label": "Sunglasses",
+      "category": "accessory",
+      "subcategory": "sunglasses",
+      "pattern": "plain",
+      "fit": "regular",
+      "silhouette": "regular",
+      "length": "regular",
+      "material": "metal",
+      "formality": "casual",
+      "color_primary": "grey",
+      "color_secondary": null,
+      "layer": "outer",
+      "style_tags": [
+        "casual",
+        "streetwear"
+      ],
+      "occasions": [
+        "casual_outing",
+        "vacation"
+      ],
+      "seasons": [
+        "summer",
+        "spring"
+      ],
+      "weather": [
+        "hot",
+        "warm"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "box_2d": [
+        463.0,
+        561.0,
+        489.0,
+        601.0
+      ],
+      "name": "Wristwatch",
+      "label": "Watch",
+      "category": "accessory",
+      "subcategory": "watch",
+      "pattern": "plain",
+      "fit": "regular",
+      "silhouette": "regular",
+      "length": "regular",
+      "material": "metal",
+      "formality": "casual",
+      "color_primary": "silver",
+      "color_secondary": "green",
+      "layer": "outer",
+      "style_tags": [
+        "casual",
+        "minimal"
+      ],
+      "occasions": [
+        "college",
+        "casual_outing"
+      ],
+      "seasons": [
+        "spring",
+        "summer",
+        "fall",
+        "winter"
+      ],
+      "weather": [
+        "warm",
+        "cool",
+        "hot"
+      ],
+      "confidence": 0.92
+    }
+  ]
+}

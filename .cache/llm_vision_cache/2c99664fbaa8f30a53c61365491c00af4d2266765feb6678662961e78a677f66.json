@@ -1,0 +1,127 @@
+{
+  "person_count": 1,
+  "is_group_photo": false,
+  "has_no_person": false,
+  "rejection_reason": null,
+  "items": [
+    {
+      "box_2d": [
+        153.0,
+        297.0,
+        538.0,
+        673.0
+      ],
+      "name": "Light Blue Denim Shirt",
+      "label": "Light Blue Denim Shirt",
+      "category": "top",
+      "subcategory": "shirt",
+      "pattern": "plain",
+      "fit": "regular",
+      "silhouette": "straight",
+      "length": "regular",
+      "material": "denim",
+      "formality": "casual",
+      "color_primary": "faded_denim",
+      "color_secondary": null,
+      "layer": "base",
+      "style_tags": [
+        "casual",
+        "streetwear",
+        "minimal"
+      ],
+      "occasions": [
+        "casual_outing",
+        "college"
+      ],
+      "seasons": [
+        "spring",
+        "fall"
+      ],
+      "weather": [
+        "warm",
+        "cool"
+      ],
+      "confidence": 0.98
+    },
+    {
+      "box_2d": [
+        499.0,
+        344.0,
+        873.0,
+        602.0
+      ],
+      "name": "Dark Indigo Cargo Jeans",
+      "label": "Dark Indigo Cargo Jeans",
+      "category": "bottom",
+      "subcategory": "jeans",
+      "pattern": "plain",
+      "fit": "slim",
+      "silhouette": "tapered",
+      "length": "ankle_length",
+      "material": "denim",
+      "formality": "casual",
+      "color_primary": "indigo_denim",
+      "color_secondary": null,
+      "layer": "base",
+      "style_tags": [
+        "casual",
+        "streetwear"
+      ],
+      "occasions": [
+        "casual_outing",
+        "college"
+      ],
+      "seasons": [
+        "spring",
+        "summer",
+        "fall",
+        "winter"
+      ],
+      "weather": [
+        "warm",
+        "cool"
+      ],
+      "confidence": 0.96
+    },
+    {
+      "box_2d": [
+        800.0,
+        390.0,
+        960.0,
+        579.0
+      ],
+      "name": "White Low-Top Sneakers",
+      "label": "White Low-Top Sneakers",
+      "category": "footwear",
+      "subcategory": "sneakers",
+      "pattern": "plain",
+      "fit": "regular",
+      "silhouette": "relaxed",
+      "length": "regular",
+      "material": "leather",
+      "formality": "casual",
+      "color_primary": "pure_white",
+      "color_secondary": null,
+      "layer": "base",
+      "style_tags": [
+        "casual",
+        "streetwear",
+        "minimal"
+      ],
+      "occasions": [
+        "casual_outing",
+        "college"
+      ],
+      "seasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "weather": [
+        "warm",
+        "cool"
+      ],
+      "confidence": 0.95
+    }
+  ]
+}
